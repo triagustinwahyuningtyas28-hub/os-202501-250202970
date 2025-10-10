@@ -42,8 +42,8 @@ dmesg | head
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+hasil percobaan wsl
+<img width="1920" height="1128" alt="tyas@LAPTOP-N04BD9QM_ ~ 10_10_2025 17_36_44" src="https://github.com/user-attachments/assets/e0621fc8-25d8-446f-bf8a-705e93116af9" />
 
 ---
 
