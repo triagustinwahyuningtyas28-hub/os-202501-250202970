@@ -123,11 +123,7 @@ Virtualisasi / Subsystem	WSL2 memungkinkan menjalankan kernel Linux di Windows	T
 ---
 
 ## Kesimpulan
-Sistem operasi Linux melalui WSL2 dapat diakses dan dianalisis untuk memahami fungsi dasar kernel, seperti manajemen modul, inisialisasi sistem, dan interaksi perangkat keras, tanpa perlu instalasi Linux secara langsung.
-
-Kernel Linux berperan penting dalam mengelola sumber daya sistem dan menjalankan instruksi dasar, yang dapat diamati melalui log sistem (dmesg) dan modul yang dimuat (lsmod), menunjukkan bagaimana sistem mendeteksi dan mengatur perangkat keras secara dinamis.
-
-Perintah-perintah shell seperti uname, whoami, lsmod, dan dmesg memberikan wawasan langsung tentang cara kerja internal sistem operasi, sehingga mendukung pemahaman konsep-konsep penting seperti system call, kernel, dan manajemen perangkat.
+Sistem operasi Linux melalui WSL2 dapat diakses dan dianalisis untuk memahami fungsi dasar kernel, seperti manajemen modul, inisialisasi sistem, dan interaksi perangkat keras, tanpa perlu instalasi Linux secara langsung.Kernel Linux berperan penting dalam mengelola sumber daya sistem dan menjalankan instruksi dasar, yang dapat diamati melalui log sistem (dmesg) dan modul yang dimuat (lsmod), menunjukkan bagaimana sistem mendeteksi dan mengatur perangkat keras secara dinamis.Perintah-perintah shell seperti uname, whoami, lsmod, dan dmesg memberikan wawasan langsung tentang cara kerja internal sistem operasi, sehingga mendukung pemahaman konsep-konsep penting seperti system call, kernel, dan manajemen perangkat.
 
 ---
 
