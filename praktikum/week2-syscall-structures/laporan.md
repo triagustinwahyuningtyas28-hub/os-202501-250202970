@@ -1,20 +1,44 @@
 
-# Laporan Praktikum Minggu [X]
-Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
+# Laporan Praktikum Minggu [2]
+Topik: System Call
 
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
-- **NIM**   : [NIM Mahasiswa]  
-- **Kelas** : [Kelas]
+- **Nama**  : Tri Agustin Wahyuningtyas
+- **NIM**   : 250202970 
+- **Kelas** : 1IKRA
 
 ---
 
 ## Tujuan
-Tuliskan tujuan praktikum minggu ini.  
-Contoh:  
-> Mahasiswa mampu menjelaskan fungsi utama sistem operasi dan peran kernel serta system call.
+1. Menjelaskan konsep dan fungsi system call dalam sistem operasi.
+Konsep system call dalam sistem operasi
+System call adalah mekanisme yang memungkinkan program pengguna (user program) berinteraksi dengan kernel (inti sistem operasi). Program di user mode tidak boleh langsung mengakses perangkat keras atau memori sistem, sehingga harus menggunakan system call sebagai perantara aman untuk meminta layanan dari OS.
+
+Fungsi system call dalam sistem operasi
+Process Control: fork(), exec(), exit() – mengatur proses.
+File Management: open(), read(), write(), close() – operasi file.
+Device Management: ioctl(), read(), write() – akses perangkat I/O.
+Information Maintenance: getpid(), alarm() – informasi sistem/proses.
+Communication: pipe(), socket(), send(), recv() – komunikasi antar proses.
+
+2.Mengidentifikasi jenis-jenis system call dan fungsinya.
+Process Control (Pengendalian Proses):digunakan untuk membuat, mengatur, dan mengakhiri proses.
+File Management (Manajemen Berkas):digunakan untuk membuka, membaca, menulis, dan menutup file.
+Device Management (Manajemen Perangkat):digunakan untuk mengakses dan mengontrol perangkat input/output (I/O) seperti printer, disk, atau keyboard.
+Information Maintenance (Pemeliharaan Informasi):digunakan untuk mengambil atau mengatur informasi tentang sistem atau proses.
+Communication (Komunikasi Antarproses / Interprocess Communication – IPC):digunakan agar proses dapat bertukar data atau berkoordinasi satu sama lain.
+
+3.Mengamati alur perpindahan mode user ke kernel saat system call terjadi.
+User Mode: Program aplikasi berjalan di user mode.
+Pemanggilan System Call: Program memanggil system call (misal read(), write()).
+Trap / Interrupt: CPU melakukan trap untuk berpindah ke kernel mode.
+Kernel Mode: Kernel mengeksekusi permintaan system call.
+Kembali ke User Mode: Setelah selesai, CPU kembali ke user mode, dan hasil system call dikembalikan ke program.
+
+4.Menggunakan perintah Linux untuk menampilkan dan menganalisis system call.
+
 
 ---
 
