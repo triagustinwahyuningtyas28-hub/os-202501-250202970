@@ -93,14 +93,42 @@ hasil percobaan
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+Resolusi dan buka file
+openat(AT_FDCWD, "/etc/passwd", O_RDONLY|O_CLOEXEC)
+glibc modern biasanya memanggil openat (bukan open) dengan AT_FDCWD (artinya relatif ke current working directory, tetapi path absolut dipakai jadi sama efeknya).
+Flags umum: O_RDONLY (baca saja) dan sering O_CLOEXEC (auto-tutup saat exec berikutnya).
+Kernel: lakukan lookup path melalui VFS — dentry lookup untuk setiap komponen path, cek permission (mode dan ACL), dapatkan inode dan file structure.
+Jika sukses, kernel mengembalikan file descriptor (contoh: 3) ke proses.
+Membaca isi file
+read(3, buf, 4096)
+Proses memanggil read pada fd yang dikembalikan (3).
+Kernel memproses read lewat VFS: cek file->f_op->read_iter (opsi implementasi file system).
+Page cache: kernel dulu cek page cache. Jika halaman ada → data di-copy_to_user dari cache. Jika tidak ada → kernel meng-issue I/O blok ke disk (readpages), blok dibaca ke page cache lalu disalin ke buffer pengguna.
+Return value = jumlah byte yang berhasil dikembalikan (>0). Untuk file kecil seperti /etc/passwd biasanya satu read mengembalikan seluruh isi (mis. 512 bytes).
+Ketika sampai akhir file (EOF), read mengembalikan 0.
+Menulis ke stdout
+write(1, buf, n)
+stdout. Jika stdout adalah terminal/pty, data dikirim ke driver pty/TTY, yang menaruh data ke buffer pty dan akhirnya tampil di layar. Jika stdout dialihkan ke file, data masuk ke page cache file yang dituju.
+Kernel mengembalikan jumlah byte tertulis. Untuk perangkat karakter (tty) penulisan biasanya non-blok atau blok tergantung buffer/flow control.
+Loop sampai EOF
+Program (cat) biasanya membaca dalam loop: read → write → ulang sampai read mengembalikan 0.
+Menutup file
+close(3)
+Kernel akan menutup FD: mengurangi counter referensi pada file struct. Jika ini referensi terakhir, file->f_op->release/inode/blob mungkin dipanggil; resources dilepas. close mengembalikan 0 bila sukses.  
 
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Kesimpulan Praktikum:
+
+Interaksi user–kernel terjadi melalui system call.
+Perintah cat /etc/passwd menggunakan system call open, read, write, dan close untuk meminta layanan kernel dalam membuka, membaca, menampilkan, lalu menutup file.
+
+Kernel mengelola akses file secara aman dan efisien.
+Kernel memeriksa izin akses saat membuka file, membaca data melalui mekanisme page cache, dan mengirimkan hasilnya ke stdout tanpa memberikan akses langsung ke perangkat keras.
+
+System call menunjukkan alur dasar operasi file di Linux.
+Urutan open → read → write → close mencerminkan proses standar yang dilakukan hampir semua program saat bekerja dengan file di sistem operasi berbasis UNIX.
 
 ---
 
@@ -116,8 +144,8 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini =menjelaskan  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini =menjelskan fungsi system call (strace dll)
+- Bagaimana cara Anda mengatasinya? = berdiskusi sesama teman yang sudah paham.
 
 ---
 
