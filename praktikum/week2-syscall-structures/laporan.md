@@ -39,7 +39,7 @@ Kernel Mode: Kernel mengeksekusi permintaan system call.
 Kembali ke User Mode: Setelah selesai, CPU kembali ke user mode, dan hasil system call dikembalikan ke program.
 
 4.Menggunakan perintah Linux untuk menampilkan dan menganalisis system call.
-perintah linux untuk menampilkan system call adalah strace. strace ini juga berfungsi untuk menganalisis system call
+Perintah linux untuk menampilkan system call adalah strace.Strace ini juga berfungsi untuk menganalisis system call
 
 ---
 
