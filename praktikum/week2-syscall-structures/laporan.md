@@ -119,31 +119,85 @@ hasil percobaan system call
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+open() – Membuka file
+Program cat meminta kernel untuk membuka file /etc/passwd.
+Kernel memeriksa apakah file tersebut ada dan apakah user memiliki izin untuk membukanya.
+Jika diizinkan, kernel membuat file descriptor, yaitu nomor unik yang mewakili file tersebut di dalam sistem.
+
+read() – Membaca isi file
+Program meminta kernel membaca isi file melalui file descriptor.
+Kernel mengambil data dari disk (storage) dan menyalinnya ke memori (buffer) program.
+Data tersebut kemudian siap ditampilkan atau diolah oleh program.
+
+write() – Menulis ke output
+Program cat menggunakan system call write() untuk menampilkan isi file ke layar (stdout).
+Kernel mengirimkan data dari memori program ke perangkat output (biasanya terminal).
+
+close() – Menutup file
+Setelah selesai, program memanggil close() untuk memberitahu kernel bahwa file sudah tidak digunakan.
+Kernel kemudian melepaskan file descriptor dan sumber daya lain yang terkait. 
+
+
+dmesg (display message) menampilkan pesan-pesan dari kernel ring buffer, yaitu log yang dihasilkan oleh kernel Linux saat sistem melakukan booting atau saat perangkat keras dan driver dijalankan.
+
+Log ini mencakup hal-hal seperti:
+Proses inisialisasi perangkat keras (misal AC adapter, baterai, CPU, jaringan)
+Pesan dari modul kernel (seperti kvm_intel, intel_rapl_msr)
+Error atau peringatan sistem rendah (misal: “suspect GRO implementation”)
+Jadi, dmesg menampilkan aktivitas sistem level kernel, bukan aktivitas aplikasi user biasa.
+
+| Aspek            | Output `dmesg`                                            | Output Program Biasa                                   |
+| ---------------- | --------------------------------------------------------- | ------------------------------------------------------ |
+| **Sumber**       | Kernel (sistem operasi inti)                              | User-space program (misal `cat`, `ls`, `python`, dll.) |
+| **Isi Pesan**    | Status hardware, driver, dan kernel internal              | Hasil dari instruksi atau log program                  |
+| **Akses**        | Butuh hak akses ke kernel (bisa `sudo`)                   | Dijalankan langsung oleh user                          |
+| **Tujuan**       | Debugging sistem & hardware                               | Memberikan hasil kerja program ke pengguna             |
+| **Contoh Pesan** | `[7.981179] ACPI: battery: Slot [BAT1] (battery present)` | `Hello World`, hasil perhitungan, dsb.                 |
+
+dmesg = log dari otak sistem operasi (kernel)
+Program biasa = hasil kerja dari pengguna atau aplikasi di atas OS 
 
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Perintah dmesg digunakan untuk menampilkan log kernel, yaitu pesan-pesan yang dihasilkan oleh sistem operasi saat proses booting, inisialisasi perangkat keras, atau saat terjadi kesalahan di level sistem.
+Output dmesg berbeda dari output program biasa, karena pesan tersebut berasal dari kernel mode (inti sistem), bukan dari user mode (aplikasi pengguna).
+Analisis log dmesg membantu mendeteksi masalah hardware atau driver, seperti error jaringan, baterai, atau modul kernel yang bermasalah.
 
 ---
 
 ## Quiz
-1. Apa fungsi utama system call dalam sistem operasi? 
-    
+1. Apa fungsi utama system call dalam sistem operasi?
+Fungsi utama system call dalam sistem operasi adalah sebagai jembatan antara program (user mode) dan kernel (kernel mode).
+
+Lebih jelasnya, fungsi utamanya yaitu:
+Memberikan akses ke layanan kernel — seperti mengakses file, perangkat keras, atau memori.
+Memungkinkan program berinteraksi dengan sistem operasi tanpa harus langsung mengakses perangkat keras.
+Menjamin keamanan dan stabilitas sistem dengan membatasi akses langsung dari user ke kernel.
 2. Sebutkan 4 kategori system call yang umum digunakan.
-   **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+Process Control – untuk mengatur proses.
+Contoh: fork(), exec(), exit().
+
+File Management – untuk mengelola file.
+Contoh: open(), read(), write(), close().
+
+Device Management – untuk berinteraksi dengan perangkat keras.
+Contoh: ioctl(), read(), write().
+
+Information Maintenance – untuk mendapatkan atau mengatur informasi sistem.
+Contoh: getpid(), alarm(), time().
+
+3. Mengapa system call tidak bisa dipanggil langsung oleh user program?  
+Keamanan: Agar user tidak bisa mengakses atau mengubah kernel dan perangkat keras secara langsung yang bisa merusak sistem.
+Perlindungan sistem: Kernel berjalan di privileged mode, sedangkan program biasa di user mode. Hanya kernel yang boleh menjalankan instruksi tertentu.
+Stabilitas: Dengan pembatasan ini, kesalahan dalam program user tidak akan membuat seluruh sistem crash. 
 
 ---
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini? = masih sesuai dengan week 1 yaitu mengejar deadline  
+- Bagaimana cara Anda mengatasinya? = mengerjakan praktikum secepat mungkin
 
 ---
 
