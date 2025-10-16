@@ -93,28 +93,83 @@ hasil percobaan
 ---
 
 ## Analisis
-Resolusi dan buka file
-openat(AT_FDCWD, "/etc/passwd", O_RDONLY|O_CLOEXEC)
-glibc modern biasanya memanggil openat (bukan open) dengan AT_FDCWD (artinya relatif ke current working directory, tetapi path absolut dipakai jadi sama efeknya).
-Flags umum: O_RDONLY (baca saja) dan sering O_CLOEXEC (auto-tutup saat exec berikutnya).
-Kernel: lakukan lookup path melalui VFS — dentry lookup untuk setiap komponen path, cek permission (mode dan ACL), dapatkan inode dan file structure.
-Jika sukses, kernel mengembalikan file descriptor (contoh: 3) ke proses.
-Membaca isi file
-read(3, buf, 4096)
-Proses memanggil read pada fd yang dikembalikan (3).
-Kernel memproses read lewat VFS: cek file->f_op->read_iter (opsi implementasi file system).
-Page cache: kernel dulu cek page cache. Jika halaman ada → data di-copy_to_user dari cache. Jika tidak ada → kernel meng-issue I/O blok ke disk (readpages), blok dibaca ke page cache lalu disalin ke buffer pengguna.
-Return value = jumlah byte yang berhasil dikembalikan (>0). Untuk file kecil seperti /etc/passwd biasanya satu read mengembalikan seluruh isi (mis. 512 bytes).
-Ketika sampai akhir file (EOF), read mengembalikan 0.
-Menulis ke stdout
-write(1, buf, n)
-stdout. Jika stdout adalah terminal/pty, data dikirim ke driver pty/TTY, yang menaruh data ke buffer pty dan akhirnya tampil di layar. Jika stdout dialihkan ke file, data masuk ke page cache file yang dituju.
-Kernel mengembalikan jumlah byte tertulis. Untuk perangkat karakter (tty) penulisan biasanya non-blok atau blok tergantung buffer/flow control.
-Loop sampai EOF
-Program (cat) biasanya membaca dalam loop: read → write → ulang sampai read mengembalikan 0.
-Menutup file
-close(3)
-Kernel akan menutup FD: mengurangi counter referensi pada file struct. Jika ini referensi terakhir, file->f_op->release/inode/blob mungkin dipanggil; resources dilepas. close mengembalikan 0 bila sukses.  
+Analisis bagaimana file dibuka, dibaca, dan ditutup oleh kernel.
+
+
+1) Buka file
+
+Contoh baris strace yang muncul:
+openat(AT_FDCWD, "/etc/passwd", O_RDONLY) = 3
+Proses (cat) meminta kernel membuka path /etc/passwd — modern strace biasanya menampilkan openat bukan open.
+Flag O_RDONLY berarti hanya baca. Kernel mencari inode lewat VFS (virtual file system).
+Kernel mengembalikan file descriptor (FD), mis. 3 — angka kecil di atas 0..2 (stdin/stdout/stderr).
+Peran kernel: memeriksa hak akses, mengikat FD ke struktur file internal (struct file), dan menghubungkannya ke inode dan offset awal (0).
+
+2) Membaca isi file (loop baca sampai EOF)
+
+Contoh baris berulang:
+read(3, "root:x:0:0:root:/root:/bin/bash\n...", 4096) = 204
+read(3, ..., 4096) = 0
+
+cat memanggil read(fd, buf, size) berulang — umumnya ukuran buffer adalah 4096 (atau nilai lain) tergantung implementasi libc.
+Kernel mengisi buffer dengan data dari page cache (jika sudah ada) atau dari disk jika belum cached.
+Setiap panggilan read mengembalikan jumlah byte yang berhasil dibaca. Ketika read mengembalikan 0 artinya EOF (tidak ada data lagi).
+Peran kernel: mengelola offset file (menambah offset sesuai byte yang dibaca), memetakan data dari storage ke memori (page cache), dan memastikan akses aman sesuai permission.
+
+3) Menulis ke stdout
+
+write(1, "root:x:0:0:root:/root:/bin/bash\n...", 204) = 204
+Setelah mendapat data, cat memanggil write(1, buf, n) untuk menyalurkan ke file descriptor 1 (stdout).
+Kernel menyalin data dari buffer proses ke buffer kernel/driver yang mengelola tty atau pipe — akhirnya data muncul di terminal atau dialirkan ke program lain.
+Peran kernel: menyalin data antar ruang proses dan perangkat/pipe, mengatur blocking/non-blocking tergantung mode.
+
+4) Menutup file
+
+close(3) = 0
+Ketika cat selesai, ia memanggil close(fd). Kernel mengurangi referensi ke struktur file, jika tidak ada referensi lagi maka resource dilepas.
+close memastikan flush metadata bila perlu (walau untuk read-only tidak ada tulis yang harus di-flush).
+Peran kernel: membersihkan descriptor, mengurangi refcount internal, melepaskan struktur yang terkait.
+
+Ringkasan — poin penting (2–3 kalimat)
+open/openat meminta kernel mengikat path ke struktur file dan mengembalikan file descriptor (mis. 3).
+read dipanggil dalam loop; kernel mengembalikan blok data (dari page cache atau disk) sampai read mengembalikan 0 → EOF.
+write mengirim data ke stdout (FD 1); close melepaskan FD dan resource kernel.
+
+Catatan tambahan berguna
+Anda mungkin juga melihat read/write dengan ukuran berbeda (libc atau implementasi cat menentukan buffer).
+Jika cat /etc/passwd dijalankan lewat pipe, kernel mengatur pipe buffer; jika output ke terminal, kernel mengirim ke driver TTY.
+Untuk melihat juga pemanggilan stat atau open lain (mis. akses symlink, permisos), jalankan strace -e trace=file atau tanpa filter.
+
+Amati log kernel yang muncul. Apa bedanya output ini dengan output dari program biasa?
+
+1️ Output strace menampilkan aktivitas kernel (system call).
+strace tidak menunjukkan hasil program (seperti isi /etc/passwd),
+melainkan log interaksi antara program dan kernel.
+
+Baris seperti:
+openat(AT_FDCWD, "/etc/passwd", O_RDONLY) = 3
+read(3, "root:x:0:0:root:/root:/bin/bash\n", 4096) = 204
+write(1, "root:x:0:0:root:/root:/bin/bash\n", 204) = 204
+close(3) = 0
+adalah panggilan sistem yang terjadi di level kernel.
+
+2️ Output program biasa (cat /etc/passwd) menampilkan hasil akhir ke user.
+Tanpa strace, yang muncul di layar hanyalah isi file /etc/passwd, misalnya:
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+...
+
+
+3️ Jadi perbedaan utamanya:
+Aspek	Output strace	Output program biasa (cat /etc/passwd)
+Isi	Log aktivitas system call antara user space ↔ kernel	Data atau teks hasil eksekusi program
+Level	Level kernel (debug, teknis)	Level user (hasil akhir yang ditampilkan)
+Tujuan	Untuk analisis bagaimana program bekerja di dalam kernel	Untuk penggunaan normal, menampilkan isi file
+Contoh	open(), read(), write(), close()	Isi file /etc/passwd
+
+Kesimpulan singkat:
+Output strace menunjukkan log kernel (system call) yang terjadi saat cat berjalan, sedangkan output program biasa hanya menampilkan hasil akhir dari operasi tersebut tanpa detail proses internalnya.
+
 
 ---
 
