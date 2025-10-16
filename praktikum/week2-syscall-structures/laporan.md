@@ -134,11 +134,11 @@ Urutan open → read → write → close mencerminkan proses standar yang dilaku
 
 ## Quiz
 1. Apa fungsi utama system call dalam sistem operasi?
-   Adalah sebagai penghubung antara program dan kernel agar program bisa memakai layanan sistem (seperti file, memori, dan proses) dengan aman dan terkontrol tanpa langsung mengakses perangkat keras.
+**Jawaban:** Fungsi utama system call adalah sebagai penghubung antara program dan kernel agar program bisa memakai layanan sistem (seperti file, memori, dan proses) dengan aman dan terkontrol tanpa langsung mengakses perangkat keras.
 2. Sebutkan 4 kategori system call yang umum digunakan.
-   Manajemen proses, manajemen file, manajemen perangkat, pemeliharaan informasi,
+   **Jawaban:** Katagori system call yang umum digunakan adalah manajemen proses, manajemen file, manajemen perangkat, pemeliharaan informasi.
 3. Mengapa system call tidak bisa dipanggil langsung oleh user program?
-   System call tidak bisa dipanggil langsung oleh user program karena alasan keamanan dan stabilitas sistem operasi.
+   **Jawaban:** System call tidak bisa dipanggil langsung oleh user program karena alasan keamanan dan stabilitas sistem operasi.
 
 ---
 
