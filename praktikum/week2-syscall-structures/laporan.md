@@ -93,7 +93,8 @@ hasil percobaan
 ---
 
 ## Analisis
-Analisis bagaimana file dibuka, dibaca, dan ditutup oleh kernel.
+
+**Analisis bagaimana file dibuka, dibaca, dan ditutup oleh kernel.*
 
 
 1) Buka file
@@ -140,7 +141,7 @@ Anda mungkin juga melihat read/write dengan ukuran berbeda (libc atau implementa
 Jika cat /etc/passwd dijalankan lewat pipe, kernel mengatur pipe buffer; jika output ke terminal, kernel mengirim ke driver TTY.
 Untuk melihat juga pemanggilan stat atau open lain (mis. akses symlink, permisos), jalankan strace -e trace=file atau tanpa filter.
 
-Amati log kernel yang muncul. Apa bedanya output ini dengan output dari program biasa?
+**Amati log kernel yang muncul. Apa bedanya output ini dengan output dari program biasa?**
 
 1️ Output strace menampilkan aktivitas kernel (system call).
 strace tidak menunjukkan hasil program (seperti isi /etc/passwd),
