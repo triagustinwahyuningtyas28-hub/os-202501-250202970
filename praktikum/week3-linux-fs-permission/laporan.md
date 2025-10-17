@@ -1,5 +1,5 @@
 
-# Laporan Praktikum Minggu III
+# Laporan Praktikum Minggu [3]
 Topik: Manajemen File dan Permission di Linux
 
 ---
@@ -126,11 +126,11 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Quiz
 1. Apa fungsi dari perintah `chmod`? 
-   **Jawaban:**  
+   **Kata CHMOD adalah singkatan dari CHange MODe, atau terjemahan bebasnya adalah merubah mode**  
 2. Apa arti dari kode permission `rwxr-xr--`?  
-   **Jawaban:**  
+   **rwx r-xr-x) mewakili izin yang telah ditetapkan kepada pemilik berkas.**  
 3. Jelaskan perbedaan antara `chown` dan `chmod`.  
-   **Jawaban:**  
+   **perintah chmod digunakan untuk mengatur hak akses, sedangkan perintah chown digunakan untuk mengatur kepemilikan.**  
 
 ---
 
