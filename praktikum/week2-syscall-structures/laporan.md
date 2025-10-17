@@ -167,8 +167,15 @@ Level	Level kernel (debug, teknis)	Level user (hasil akhir yang ditampilkan)
 Tujuan	Untuk analisis bagaimana program bekerja di dalam kernel	Untuk penggunaan normal, menampilkan isi file
 Contoh	open(), read(), write(), close()	Isi file /etc/passwd
 
-Kesimpulan singkat:
-Output strace menunjukkan log kernel (system call) yang terjadi saat cat berjalan, sedangkan output program biasa hanya menampilkan hasil akhir dari operasi tersebut tanpa detail proses internalnya.
+| Aspek                      | Log Kernel (`dmesg`, `/var/log/kern.log`)                                        | Output Program Biasa (mis. `printf`, `ls`, `cat`)   |
+| -------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **Sumber Output**          | Kernel (kernel space)                                                            | Aplikasi pengguna (user space)                      |
+| **Isi Informasi**          | Aktivitas sistem: inisialisasi driver, error hardware, system call, boot message | Hasil proses logika program, data keluaran pengguna |
+| **Akses dan Hak Istimewa** | Membutuhkan hak root atau akses khusus untuk melihat/modifikasi                  | Dapat dijalankan oleh user biasa                    |
+| **Media Tampilan**         | Melalui `dmesg`, file log sistem (`/var/log/`)                                   | Langsung tampil di terminal atau GUI                |
+| **Tujuan**                 | Debugging sistem, pemantauan kinerja kernel, keamanan                            | Memberi hasil/output program untuk pengguna         |
+| **Contoh Output**          | `[1234.567890] usb 1-2: new USB device detected`                                 | `Hello World`, `File ditemukan: data.txt`           |
+
 
 
 ---
