@@ -165,6 +165,28 @@ Output dmesg berbeda dari output program biasa, karena pesan tersebut berasal da
 Analisis log dmesg membantu mendeteksi masalah hardware atau driver, seperti error jaringan, baterai, atau modul kernel yang bermasalah.
 
 ---
+## Tugas
+1. Dokumentasikan hasil eksperimen strace dan dmesg dalam bentuk tabel observasi.
+
+strace
+| No | Perintah yang Dijalankan                                | System Call yang Diamati | Deskripsi Proses                         | Hasil/Output Utama                          | Keterangan                                                |
+| -- | ------------------------------------------------------- | ------------------------ | ---------------------------------------- | ------------------------------------------- | --------------------------------------------------------- |
+| 1  | `strace -e trace=open,read,write,close cat /etc/passwd` | `open()`                 | Membuka file `/etc/passwd` untuk dibaca. | File berhasil dibuka dengan mode read-only. | Menunjukkan izin akses file oleh user.                    |
+| 2  | `strace -e trace=open,read,write,close cat /etc/passwd` | `read()`                 | Membaca isi file baris demi baris.       | Data user-account dari sistem ditampilkan.  | Kernel menyalurkan data dari disk ke buffer.              |
+| 3  | `strace -e trace=open,read,write,close cat /etc/passwd` | `write()`                | Menulis output ke layar (stdout).        | Isi file muncul di terminal.                | Menunjukkan interaksi antara proses dan perangkat output. |
+| 4  | `strace -e trace=open,read,write,close cat /etc/passwd` | `close()`                | Menutup file setelah proses selesai.     | File ditutup tanpa error.                   | Menunjukkan akhir siklus hidup file descriptor.           |
+
+dmesg
+
+| No | Perintah yang Dijalankan | Output yang Diamati | Deskripsi Pesan Kernel                 | Keterangan                                                                            |                                                        |
+| -- | ------------------------ | ------------------- | -------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| 1  | `dmesg                   | head -n 10`         | Menampilkan pesan awal proses booting. | Menunjukkan inisialisasi perangkat keras (CPU, memori, driver, dll).                  | Menandakan kernel telah memuat komponen utama sistem.  |
+| 2  | `dmesg                   | grep usb`           | Menampilkan log deteksi perangkat USB. | Kernel mendeteksi dan menginisialisasi perangkat USB yang terhubung.                  | Memastikan perangkat eksternal dikenali oleh sistem.   |
+| 3  | `dmesg                   | grep eth0`          | Menampilkan log aktivitas jaringan.    | Kernel mencatat proses inisialisasi dan koneksi interface jaringan.                   | Menunjukkan status jaringan aktif atau error.          |
+| 4  | `dmesg                   | tail -n 10`         | Menampilkan pesan kernel terbaru.      | Log terbaru berisi aktivitas sistem terakhir (misalnya mounting disk, journald, dll). | Menunjukkan sistem berjalan normal tanpa error kritis. |
+
+
+
 
 ## Quiz
 1. Apa fungsi utama system call dalam sistem operasi?
