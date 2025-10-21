@@ -107,20 +107,140 @@ Tuliskan potongan kode atau perintah utama:
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+screenshot hasil percobaan linux
+<img width="1919" height="1036" alt="Screenshot 2025-10-21 152652" src="https://github.com/user-attachments/assets/8e5e5caf-8d5b-4440-ab89-a1c340fcc92a" />
+
 
 ---
 
 ## Analisis
 - Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+1. pwd
+Artinya: Print Working Directory
+Fungsi: Menampilkan lokasi direktori tempat kamu sedang berada.
+Hasil di gambar:
+
+/tmp
+
+
+temp yaitu folder sementara (temporary directory) yang biasanya digunakan sistem atau program untuk menyimpan file sementara.
+
+2.ls -l
+
+Artinya: List (long format)
+Fungsi: Menampilkan isi folder secara detail, termasuk hak akses, pemilik, grup, ukuran, dan waktu modifikasi.
+Hasil di gambar:
+
+drwx------ 2 root root 4096 Oct 21 15:18 snap-private-tmp
+drwx------ 3 root root 4096 Oct 21 15:18 systemd-private-...-logind.service-FLd6gu
+...
+
+
+Penjelasan kolomnya:
+drwx------ → tipe file dan hak akses:
+
+d = directory
+r = read
+w = write
+x = execute
+
+root root → pemilik dan grup pemilik adalah root (administrator sistem).
+4096 → ukuran direktori dalam byte.
+Oct 21 15:18 → waktu terakhir dimodifikasi.
+Nama folder di akhir adalah nama direktori dalam /tmp.
+
+3. cd /tmp
+Artinya: Change Directory ke /tmp.
+Fungsi: Masuk atau berpindah ke direktori /tmp.
+Hasil di gambar:
+Tidak ada output — artinya perintah berhasil, dan kamu sekarang berada di dalam /tmp (yang sebenarnya sudah di situ sebelumnya, jadi ini tidak mengubah apa pun).
+
+4. ls -a
+Artinya: List all files
+Fungsi: Menampilkan semua isi direktori, termasuk file atau folder tersembunyi (yang diawali dengan titik .).
+Hasil di gambar:
+
+.X11-unix  systemd-private-...  snap-private-tmp
+
+
+Penjelasannya:
+→ menunjuk ke direktori saat ini (/tmp itu sendiri).
+→ menunjuk ke direktori induk (/, root).
+
+.X11-unix → folder tersembunyi yang digunakan oleh sistem grafis X11.
+systemd-private-* → folder sementara milik layanan systemd (misalnya logind, resolved, timesyncd, dll.).
+snap-private-tmp → folder sementara untuk aplikasi yang dijalankan melalui Snap.
+
+**Jelaskan isi file dan struktur barisnya (user, UID, GID, home, shell).**
+
+Format umum /etc/passwd
+Setiap baris di file /etc/passwd punya 7 kolom yang dipisah dengan titik dua (:):
+username:password:UID:GID:GECOS:home_directory:shell
+
+
+Penjelasan kolom:
+username — nama akun (login name).
+password — biasanya berisi x yang berarti password disimpan terpisah di /etc/shadow. (Dulu hash disimpan di sini, tapi itu sudah tidak aman.)
+UID — user ID (angka unik untuk user).
+0 = root.
+UID kecil (1–99/999) biasanya akun sistem.
+UID ≥1000 biasanya user biasa.
+GID — group ID utama user (angka), merujuk ke /etc/group.
+GECOS — field informasi (biasanya nama lengkap, ruangan, telepon kerja, dll). Bisa kosong.
+home_directory — path ke direktori home user.
+shell — program shell/login yang dijalankan saat user login. Bisa berupa:
+/bin/bash, /bin/sh → shell interaktif biasa
+/usr/sbin/nologin atau /sbin/nologin → menolak login interaktif
+program lain seperti /bin/sync → menjalankan program tersebut saat login (biasa untuk akun layanan khusus)
+Contoh baris yang kamu tampilkan (dengan arti tiap field)
+root:x:0:0:root:/root:/bin/bash
+
+username: root
+password: x (hash di /etc/shadow)
+UID: 0 (superuser)
+GID: 0 (group root)
+GECOS: root
+home: /root
+shell: /bin/bash (root dapat login interaktif dengan bash)
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+
+username: daemon
+UID: 1 (akun sistem untuk daemon)
+GID: 1
+home: /usr/sbin (tidak untuk login user biasa)
+shell: /usr/sbin/nologin (tidak mengizinkan login interaktif)
+Digunakan oleh proses layanan yang tidak butuh shell login.
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+
+username: bin
+UID: 2 (akun sistem tua, historis)
+home: /bin
+shell: /usr/sbin/nologin (tidak untuk login)
+Biasanya akun ini hanya historis/untuk kepentingan sistem.
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+
+username: sys
+UID: 3 (akun sistem)
+home: /dev
+shell: /usr/sbin/nologin
+Juga akun sistem untuk tugas OS internal.
+sync:x:4:65534:sync:/bin:/bin/sync
+
+username: sync
+UID: 4
+GID: 65534 (seringkali nobody/non-privileged group)
+home: /bin
+shell: /bin/sync — kalau ada yang mencoba login ke akun sync, program /bin/sync akan dijalankan (menyinkronkan buffer ke disk) lalu keluar. Ini adalah akun utilitas khusus, bukan akun login normal.
 
 ---
 
 ## Kesimpulan
 Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+
+---
+
+## Tugas
+
 
 ---
 
@@ -136,8 +256,8 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini? =Memahami struktur sistem Linux
+- Bagaimana cara Anda mengatasinya?  = dengan cara belajar otodidak bersama teman teman
 
 ---
 
