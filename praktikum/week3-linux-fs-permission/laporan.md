@@ -96,15 +96,110 @@ dmesg | head
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+screenshot hasil linux
+<img width="1920" height="1128" alt="tyas@LAPTOP-N04BD9QM_ ~ 10_10_2025 17_36_44" src="https://github.com/user-attachments/assets/c1c45346-d78b-4e11-b829-f6cf71d6581f" />
+
 
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+**Analisis perbedaan sebelum dan sesudah chmod.**
+Sebelum chmod 600 percobaan.txt
+Perintah:
+ls -l percobaan.txt
+
+
+Output:
+-rw-r--r-- 1 tyas tyas 24 Oct 21 17:34 percobaan.txt
+Analisis izin (permission):
+-rw-r--r--
+r = read (baca)
+w = write (tulis)
+x = execute (eksekusi)
+
+Rinciannya:
+Owner (tyas): rw- → bisa membaca dan menulis
+Group (tyas): r-- → hanya membaca
+Others (pengguna lain): r-- → hanya membaca
+Artinya: File ini dapat dibaca oleh semua pengguna, tetapi hanya pemilik yang bisa mengubah isinya.
+
+Sesudah chmod 600 percobaan.txt
+Perintah:
+chmod 600 percobaan.txt
+ls -l percobaan.txt
+
+
+Output:
+-rw------- 1 tyas tyas 24 Oct 21 17:34 percobaan.txt
+Analisis izin (permission):
+-rw-------
+Owner (tyas): rw- → bisa membaca dan menulis
+Group: --- → tidak ada izin
+Others: --- → tidak ada izin
+
+Artinya: Hanya pemilik file (tyas) yang dapat membaca dan menulis file tersebut. Pengguna lain tidak dapat melihat atau mengakses isi file sama sekali.
+
+
+:
+
+1. pwd
+
+Kepanjangan: print working directory
+Fungsi: Menampilkan lokasi (path) direktori tempat kamu sedang bekerja sekarang.
+
+Contoh hasil:
+tyas@LAPTOP-N04BD9QM:~$ pwd
+/home/tyas
+
+Artinya kamu sedang berada di direktori /home/tyas.
+
+2. ls -l
+Kepanjangan: list (long format)
+Fungsi: Menampilkan daftar isi direktori saat ini dengan informasi lengkap, seperti:
+hak akses (permission)
+jumlah link
+pemilik (owner)
+grup
+ukuran file
+waktu terakhir diubah
+nama file/direktori
+Contoh hasil:
+-rw-r--r-- 1 tyas tyas  24 Oct 21 17:34 percobaan.txt
+drwxr-xr-x 2 tyas tyas 4096 Oct 21 16:00 Documents
+
+| Kolom           | Arti                  |
+| --------------- | --------------------- |
+| `-rw-r--r--`    | Izin akses file       |
+| `1`             | Jumlah link ke file   |
+| `tyas`          | Pemilik file          |
+| `tyas`          | Grup pemilik          |
+| `24`            | Ukuran file (byte)    |
+| `Oct 21 17:34`  | Waktu terakhir diubah |
+| `percobaan.txt` | Nama file             |
+
+
+3. cd /tmp
+Kepanjangan: change directory
+Fungsi: Berpindah ke direktori lain, dalam hal ini ke /tmp.
+Hasil:
+tyas@LAPTOP-N04BD9QM:/tmp$
+Artinya kamu sekarang berada di direktori /tmp, yaitu folder sementara (temporary folder) yang digunakan oleh sistem dan program untuk menyimpan file sementara.
+
+4. ls -a
+Kepanjangan: list all
+Fungsi: Menampilkan semua file dan folder, termasuk file tersembunyi (hidden files).
+File tersembunyi biasanya diawali dengan titik (.).
+
+Contoh hasil:
+percobaan.txt  .bashrc  .profile
+
+
+Keterangan:
+→ direktori saat ini (current directory)
+→ direktori induk (parent directory)
+
+bashrc, .profile → file konfigurasi tersembunyi
+
 
 ---
 
