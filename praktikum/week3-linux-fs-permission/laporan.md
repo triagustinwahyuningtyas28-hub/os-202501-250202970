@@ -103,7 +103,8 @@ dmesg | head
 
 ## Hasil Eksekusi
 screenshot hasil linux
-<img width="1920" height="1128" alt="tyas@LAPTOP-N04BD9QM_ ~ 10_10_2025 17_36_44" src="https://github.com/user-attachments/assets/c1c45346-d78b-4e11-b829-f6cf71d6581f" />
+<img width="946" height="545" alt="finall" src="https://github.com/user-attachments/assets/165a99e4-6fc3-4408-9bf6-a86536fb1214" />
+
 
 
 ---
