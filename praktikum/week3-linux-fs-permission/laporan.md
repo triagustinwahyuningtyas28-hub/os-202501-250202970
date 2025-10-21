@@ -25,7 +25,6 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ## Dasar Teori
 Pada praktikum minggu ini, mahasiswa akan mempelajari pengelolaan file dan direktori menggunakan perintah dasar Linux, serta konsep permission dan ownership.
 Praktikum berfokus pada:
-
 Navigasi sistem file dengan ls, pwd, cd, dan cat.
 Pengaturan hak akses file menggunakan chmod.
 Pengubahan kepemilikan file menggunakan chown.
