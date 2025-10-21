@@ -23,7 +23,14 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+Pada praktikum minggu ini, mahasiswa akan mempelajari pengelolaan file dan direktori menggunakan perintah dasar Linux, serta konsep permission dan ownership.
+Praktikum berfokus pada:
+
+Navigasi sistem file dengan ls, pwd, cd, dan cat.
+Pengaturan hak akses file menggunakan chmod.
+Pengubahan kepemilikan file menggunakan chown.
+Dokumentasi hasil eksekusi dan pengelolaan repositori praktikum.
+Tujuan utama dari praktikum ini adalah agar mahasiswa mampu mengoperasikan perintah Linux dasar dengan benar, memahami sistem izin (permission), dan mendokumentasikan hasilnya dalam format laporan Git.
 
 ---
 
