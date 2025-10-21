@@ -125,8 +125,8 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?  = memahami struktur sistem linux
+- Bagaimana cara Anda mengatasinya?  = mencari tau struktur sistem linux dan bertanya kepada teman 
 
 ---
 
