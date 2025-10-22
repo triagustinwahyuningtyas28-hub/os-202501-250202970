@@ -21,7 +21,13 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+Pada praktikum minggu ini, mahasiswa akan mempelajari pengelolaan file dan direktori menggunakan perintah dasar Linux, serta konsep permission dan ownership.
+Praktikum berfokus pada:
+
+Navigasi sistem file dengan ls, pwd, cd, dan cat.
+Pengaturan hak akses file menggunakan chmod.
+Pengubahan kepemilikan file menggunakan chown.
+Dokumentasi hasil eksekusi dan pengelolaan repositori praktikum.
 
 ---
 
@@ -108,7 +114,8 @@ Tuliskan potongan kode atau perintah utama:
 
 ## Hasil Eksekusi
 screenshot hasil percobaan linux
-<img width="1919" height="1036" alt="Screenshot 2025-10-21 152652" src="https://github.com/user-attachments/assets/8e5e5caf-8d5b-4440-ab89-a1c340fcc92a" />
+<img width="1207" height="1032" alt="Screenshot 2025-10-22 140909" src="https://github.com/user-attachments/assets/54ee9d63-3edb-4cce-95f2-b4c88da5ae8e" />
+
 
 
 ---
@@ -119,10 +126,7 @@ screenshot hasil percobaan linux
 Artinya: Print Working Directory
 Fungsi: Menampilkan lokasi direktori tempat kamu sedang berada.
 Hasil di gambar:
-
 /tmp
-
-
 temp yaitu folder sementara (temporary directory) yang biasanya digunakan sistem atau program untuk menyimpan file sementara.
 
 2.ls -l
@@ -235,12 +239,77 @@ shell: /bin/sync — kalau ada yang mencoba login ke akun sync, program /bin/syn
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Dari hasil praktikum minggu ke-3 ini, dapat disimpulkan bahwa:
+Navigasi sistem file di Linux dilakukan menggunakan perintah dasar seperti
+pwd, ls, cd, dan cat yang berfungsi untuk mengetahui lokasi kerja, menampilkan isi direktori, berpindah folder, serta membaca isi file.
+Dengan memahami ini, pengguna dapat bergerak dengan efisien di dalam struktur sistem Linux.
+
+File /etc/passwd berisi informasi penting tentang akun pengguna dalam sistem, seperti username, UID, GID, direktori home, dan shell login.
+Setiap baris mewakili satu akun user dengan 7 kolom yang dipisahkan tanda titik dua (:).
+Manajemen permission (hak akses) menggunakan perintah chmod memungkinkan kita mengatur siapa yang boleh membaca (r), menulis (w), atau mengeksekusi (x) file/direktori.
+Misalnya, chmod 600 memberi hak akses hanya kepada pemilik file (read & write saja).
+
+Ownership (kepemilikan file) dapat diubah dengan perintah chown, misalnya sudo chown root file.txt menjadikan root sebagai pemilik file tersebut.
+Hal ini penting untuk keamanan sistem agar file sensitif tidak dapat dimodifikasi oleh user biasa.
+Secara keseluruhan, pemahaman terhadap file system dan permission di Linux adalah dasar penting dalam administrasi sistem karena berhubungan langsung dengan keamanan, privasi, dan stabilitas sistem operasi.
 
 ---
 
 ## Tugas
 
+
+1. Dokumentasikan hasil seluruh perintah pada tabel observasi di laporan.md.
+2. Jelaskan fungsi tiap perintah dan arti kolom permission (rwxr-xr--).
+3. Analisis peran chmod dan chown dalam keamanan sistem Linux.
+4. Upload hasil dan laporan ke repositori Git sebelum deadline.
+
+**jawab**
+
+
+1.
+
+| **No** | **Perintah** | **Penjelasan Perintah** | **Hasil/Output** | **Kesimpulan / Analisis** |
+| :----: | :------------ | :---------------------- | :---------------- | :------------------------- |
+| 1 | `pwd` | Menampilkan direktori kerja saat ini (current directory). | `/home/levi` | Lokasi kerja aktif pengguna berada di direktori home milik user **levi**. |
+| 2 | `ls -l` | Menampilkan daftar file secara detail (long listing format). | `-rw------- 1 root levi 24 Oct 21 16:37 percobaan.txt` | File `percobaan.txt` ada di direktori home dengan hak akses hanya untuk root. |
+| 3 | `cd /tmp` | Berpindah ke direktori `/tmp`. | *(tidak ada output)* | Direktori aktif sekarang adalah `/tmp`. |
+| 4 | `ls -a` | Menampilkan semua file, termasuk file tersembunyi. | `. .. .X11-unix snap-private-tmp systemd-private-...` | Berisi direktori sementara sistem dan beberapa folder service. |
+| 5 | `cat /etc/passwd \| head -n 5` | Menampilkan 5 baris pertama dari file `/etc/passwd`. | Menampilkan informasi 5 akun sistem pertama: root, daemon, bin, sys, sync. | Menunjukkan struktur file `/etc/passwd` yang berisi informasi user sistem. |
+| 6 | `echo "Hello <levi><250202955>" > percobaan.txt` | Menulis teks ke dalam file baru bernama `percobaan.txt`. | *(tidak ada output)* | File `percobaan.txt` berhasil dibuat di direktori `/tmp` dengan isi teks tersebut. |
+| 7 | `ls -l percobaan.txt` | Menampilkan detail file `percobaan.txt`. | `-rw-r--r-- 1 levi levi 24 Oct 22 14:05 percobaan.txt` | File dimiliki oleh user dan grup **levi** dengan izin baca untuk semua orang. |
+| 8 | `chmod 600 percobaan.txt` | Mengubah permission agar hanya owner yang bisa membaca dan menulis. | *(tidak ada output)* | Izin akses file kini hanya untuk user pemilik (read & write). |
+| 9 | `ls -l percobaan.txt` | Mengecek ulang hak akses setelah `chmod`. | `-rw------- 1 levi levi 24 Oct 22 14:05 percobaan.txt` | Hak akses sudah berubah menjadi hanya untuk **levi**. |
+| 10 | `sudo chown root percobaan.txt` | Mengubah kepemilikan file menjadi milik user **root**. | *(diminta password, lalu tidak ada output)* | Kepemilikan file berhasil diubah ke root. |
+| 11 | `ls -l percobaan.txt` | Menampilkan kembali detail file setelah diubah owner-nya. | `-rw------- 1 root levi 24 Oct 22 14:05 percobaan.txt` | File sekarang dimiliki oleh **root** dengan grup **levi**, hak akses tetap hanya untuk owner. |
+
+2. Fungsi Tiap Perintah
+
+pwd → Menampilkan direktori kerja saat ini (print working directory).
+
+ls -l → Menampilkan daftar file secara detail (izin akses, pemilik, ukuran, waktu, dsb).
+
+cd /tmp → Berpindah ke direktori /tmp, tempat file sementara sistem disimpan.
+
+ls -a → Menampilkan semua file termasuk file tersembunyi (yang diawali titik).
+
+cat /etc/passwd → Menampilkan isi file /etc/passwd yang berisi data akun pengguna sistem.
+
+head -n 5 → Menampilkan lima baris pertama dari hasil keluaran perintah sebelumnya.
+
+echo "teks" > file.txt → Menulis teks ke dalam file, membuat file baru jika belum ada.
+
+chmod 600 file.txt → Mengubah izin akses file agar hanya pemilik dapat membaca dan menulis.
+
+chown root file.txt → Mengubah pemilik file menjadi user root (administrator sistem).
+
+sudo → Menjalankan perintah dengan hak akses superuser (administrator).
+
+ls -l file.txt → Menampilkan detail file untuk memeriksa hasil perubahan izin dan kepemilikan.
+
+3. Peran chmod dalam Keamanan Sistem
+
+Perintah chmod (change mode) berfungsi untuk mengatur izin akses (permission) terhadap file atau direktori.
+Tujuannya adalah untuk membatasi siapa saja yang dapat membaca, menulis, atau mengeksekusi file di dalam sistem.
 
 ---
 
@@ -256,7 +325,7 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini? =Memahami struktur sistem Linux
+- Apa bagian yang paling menantang minggu ini? = Memahami struktur sistem Linux
 - Bagaimana cara Anda mengatasinya?  = dengan cara belajar otodidak bersama teman teman
 
 ---
