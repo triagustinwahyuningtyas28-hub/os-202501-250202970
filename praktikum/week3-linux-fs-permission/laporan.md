@@ -208,10 +208,50 @@ Keterangan:
 bashrc, .profile → file konfigurasi tersembunyi
 
 
+| No | Perintah Linux | Fungsi / Tujuan | Hasil / Output | Penjelasan |
+|----|----------------|-----------------|----------------|-------------|
+| 1 | `pwd` | Menampilkan direktori kerja saat ini (working directory) | `/home/tyas` | Menunjukkan bahwa posisi pengguna saat ini berada di direktori home milik user `tyas`. |
+| 2 | `ls -l` | Menampilkan daftar file/direktori dengan format panjang (detail) | `total 0` | Tidak ada file atau folder di dalam direktori `/home/tyas`. |
+| 3 | `cd /tmp` | Berpindah ke direktori `/tmp` | *(tidak ada output)* | Direktori aktif berubah menjadi `/tmp`. |
+| 4 | `ls -a` | Menampilkan semua file termasuk yang tersembunyi | `. .. .X11-unix snap-private-tmp systemd-private-...` | Menunjukkan isi direktori `/tmp` yang berisi file sistem sementara. |
+| 5 | `cat /etc/passwd | head -n 5` | Menampilkan 5 baris pertama isi file `/etc/passwd` | `root:x:0:0:root:/root:/bin/bash` dst. | File `/etc/passwd` berisi daftar akun pengguna di sistem Linux. |
+| 6 | `echo "Hello <tyas><250202970>" > percobaan.txt` | Membuat file baru dan menulis teks ke dalamnya | *(tidak ada output)* | File `percobaan.txt` dibuat di `/tmp` dengan isi `"Hello <tyas><250202970>"`. |
+| 7 | `ls -l percobaan.txt` | Menampilkan detail file `percobaan.txt` | `-rw-r--r-- 1 tyas tyas 24 Oct 22 16:00 percobaan.txt` | File memiliki izin baca-tulis untuk pemilik (`tyas`), baca untuk grup dan lainnya. |
+| 8 | `chmod 600 percobaan.txt` | Mengubah hak akses file menjadi hanya pemilik yang bisa baca & tulis | *(tidak ada output)* | Izin file berubah menjadi `rw-------`. |
+| 9 | `ls -l percobaan.txt` | Mengecek perubahan izin | `-rw------- 1 tyas tyas 24 Oct 22 16:00 percobaan.txt` | Hanya pemilik yang dapat membaca dan menulis file. |
+| 10 | `sudo chown root percobaan.txt` | Mengubah kepemilikan file menjadi milik `root` | *(tidak ada output)* | File sekarang dimiliki oleh user `root`. |
+| 11 | `ls -l percobaan.txt` | Melihat perubahan pemilik file | `-rw------- 1 root tyas 24 Oct 22 16:00 percobaan.txt` | Pemilik file berubah menjadi `root`, grup masih `tyas`, hak akses tetap sama. |
+
+
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Perubahan izin file (chmod)
+Sebelum chmod 600, file percobaan.txt dapat dibaca oleh semua pengguna, tetapi hanya pemilik yang dapat menulis.
+Setelah chmod 600, hanya pemilik (tyas) yang memiliki izin untuk membaca dan menulis file tersebut. Pengguna lain tidak dapat mengakses sama sekali.
+Kesimpulan: Perintah chmod digunakan untuk mengatur tingkat keamanan file agar hanya pengguna tertentu yang dapat mengaksesnya.
+
+Perintah dasar Linux:
+
+pwd digunakan untuk mengetahui lokasi direktori aktif saat ini.
+
+ls -l menampilkan daftar isi direktori dengan informasi detail seperti izin akses, pemilik, dan waktu modifikasi.
+
+cd /tmp berfungsi untuk berpindah ke direktori lain, dalam hal ini ke folder sementara sistem.
+
+ls -a menampilkan semua file, termasuk file tersembunyi (yang diawali dengan titik . seperti .bashrc dan .profile).
+
+Kesimpulan umum:
+Melalui kombinasi perintah-perintah ini, pengguna dapat:
+
+Mengetahui posisi kerja di sistem (pwd)
+
+Melihat isi direktori dengan detail (ls -l dan ls -a)
+
+Berpindah antar direktori (cd)
+
+Mengatur hak akses file untuk menjaga privasi dan keamanan data (chmod)
+
 
 ---
 
