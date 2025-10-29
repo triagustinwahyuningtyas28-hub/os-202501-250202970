@@ -23,7 +23,42 @@ Tuliskan tujuan praktikum minggu ini.
 ---
 
 ## Dasar Teori
-Langkah Praktikum
+1. User dan Identitas di Linux
+Linux merupakan sistem operasi multi-user, artinya lebih dari satu pengguna dapat menggunakan sistem secara bersamaan. Untuk membedakan setiap pengguna, Linux menggunakan User ID (UID) dan Group ID (GID).
+
+Seorang user adalah entitas yang memiliki akun dan dapat menjalankan perintah di sistem. Setiap user memiliki nama pengguna (username), UID, direktori home pribadi, serta shell yang digunakan untuk menjalankan perintah (misalnya bash).
+
+Sementara itu, group digunakan untuk mengelompokkan beberapa user agar lebih mudah mengatur hak akses. Setiap user memiliki satu grup utama (primary group) dan bisa menjadi anggota dari beberapa grup tambahan (supplementary groups). Melalui sistem grup ini, administrator dapat memberikan atau membatasi izin terhadap file, perangkat, dan program tertentu.
+
+Hak akses pada sistem Linux dibagi menjadi tiga kategori, yaitu owner (pemilik file), group (grup pengguna), dan others (pengguna lain). Setiap kategori bisa diberi izin untuk membaca (read), menulis (write), dan menjalankan (execute) suatu file.
+
+2. Perintah Dasar untuk Manajemen User
+Perintah whoami digunakan untuk menampilkan nama user yang sedang login di sistem. Ini berguna untuk memastikan identitas user yang sedang aktif, terutama ketika bekerja dengan banyak akun atau hak akses berbeda.
+
+Perintah id digunakan untuk menampilkan informasi detail tentang user, seperti UID, GID, dan daftar grup yang diikuti. Dengan perintah ini, kita bisa mengetahui hak akses dan keanggotaan grup seorang user.
+
+Perintah groups menampilkan nama-nama grup yang diikuti oleh user secara ringkas. Fungsinya sama seperti id, namun hanya menampilkan nama grup tanpa ID-nya.
+
+3. Konsep Proses di Linux
+Proses adalah program yang sedang berjalan di memori. Setiap proses memiliki PID (Process ID), yaitu nomor unik yang digunakan oleh sistem untuk mengenalinya. Linux dapat menjalankan banyak proses secara bersamaan karena mendukung konsep multitasking.
+
+Proses di Linux dapat berjalan di dua mode, yaitu foreground dan background. Proses foreground berjalan langsung di terminal dan menahan input hingga selesai, sedangkan proses background berjalan di belakang layar, sehingga terminal tetap bisa digunakan untuk perintah lain. Simbol & di akhir perintah digunakan untuk menjalankan proses di background.
+
+4. Pemantauan Proses
+Untuk melihat proses yang sedang berjalan, digunakan perintah ps. Versi lengkapnya, ps aux, menampilkan semua proses dari seluruh user beserta informasi detailnya. Output dari perintah ini mencakup nama user yang menjalankan proses, PID, persentase penggunaan CPU dan memori, terminal tempat proses berjalan, status proses, serta nama perintah yang dijalankan.
+
+Status proses ditunjukkan dalam kolom STAT, misalnya huruf S berarti “sleeping” atau proses sedang menunggu, sedangkan R berarti “running” atau sedang aktif menggunakan CPU.
+
+Untuk memfilter proses tertentu, digunakan perintah grep, contohnya ps aux | grep sleep, yang akan menampilkan hanya proses yang mengandung kata “sleep”.
+
+Jika ingin menghentikan proses, dapat digunakan perintah kill diikuti dengan nomor PID dari proses tersebut.
+
+5. Manajemen Proses Latar Belakang
+Proses yang dijalankan di background dapat dilihat menggunakan perintah jobs. Jika ingin mengembalikannya ke foreground, digunakan perintah fg. Mekanisme ini memungkinkan pengguna menjalankan banyak proses sekaligus tanpa harus menunggu satu per satu selesai.
+
+---
+
+## Langkah Praktikum
 Setup Environment
 
 Sistem: Linux (Ubuntu/WSL)
@@ -262,17 +297,17 @@ Saat kamu menjalankan sleep 1000 &, proses berjalan di background, sehingga term
 
 ## Analisis
 - Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+ Praktikum ini membahas manajemen user dan proses di Linux. User mengeksplorasi perintah seperti whoami, id, dan groups untuk mengenali identitas serta hak aksesnya, lalu membuat user baru dan menguji login. Pada monitoring proses, digunakan ps aux dan top untuk melihat daftar serta penggunaan sumber daya sistem.
 
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Sistem Linux mengatur user dan proses secara terpisah namun saling berkaitan. User management digunakan untuk mengontrol siapa yang dapat mengakses sistem dan sumber daya, sedangkan process management berfungsi mengatur program apa saja yang sedang dijalankan dan bagaimana sistem mengalokasikan sumber dayanya.
+
+Pemahaman tentang perintah seperti whoami, id, groups, dan ps aux sangat penting karena menjadi dasar dalam mengenali identitas pengguna serta memantau aktivitas proses di sistem Linux.
 
 ---
 
-Tugas & Quiz
 ### Tugas
 1. Dokumentasikan hasil semua perintah dan jelaskan fungsi tiap perintah.
 
@@ -331,9 +366,6 @@ Mengubah konfigurasi kernel dan jaringan
 Mem-boot atau mematikan sistem
 Didesain untuk keamanan dan kontrol
 Dengan memusatkan hak tertinggi hanya pada satu akun (root), Linux dapat membatasi potensi kerusakan akibat kesalahan user biasa atau serangan dari luar.
-
-
-
 
 ---
 
