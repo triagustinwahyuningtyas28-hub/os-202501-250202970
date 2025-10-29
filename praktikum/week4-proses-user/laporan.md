@@ -372,8 +372,8 @@ Dengan memusatkan hak tertinggi hanya pada satu akun (root), Linux dapat membata
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini? = memahami manajemen proses and user.
+- Bagaimana cara Anda mengatasinya?  = mencari tahu di internet serta bertanya kepada teman yang sudah paham.
 
 ---
 
