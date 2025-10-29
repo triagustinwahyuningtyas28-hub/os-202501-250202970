@@ -23,7 +23,14 @@ Setelah menyelesaikan tugas ini, mahasiswa mampu:
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+mempelajari konsep proses dan manajemen user dalam sistem operasi Linux.
+Mahasiswa akan memahami bagaimana sistem operasi:
+
+Membuat dan mengatur proses (process management).
+Mengelola user, group, serta hak akses pengguna.
+Menampilkan, menghentikan, dan mengontrol proses yang sedang berjalan.
+Menghubungkan konsep user management dengan keamanan sistem operasi.
+Eksperimen dilakukan melalui penggunaan perintah dasar seperti ps, top, kill, adduser, passwd, id, dan groups.
 
 ---
 
@@ -125,8 +132,8 @@ Sertakan screenshot hasil percobaan atau diagram:
 <img width="1920" height="1020" alt="levi@LAPTOP-VEJOG5AI_ ~ 28_10_2025 16_56_25" src="https://github.com/user-attachments/assets/b80d30a3-3752-4fa4-9d1d-ccdfc8fa34f5" />
 
 
-
 ---
+
 ## Eksperimen 1
 Perintah whoami digunakan untuk menampilkan nama user yang sedang aktif atau login saat ini. Saat muncul output levi, artinya user yang sedang menjalankan terminal adalah levi. Ini berguna untuk memastikan kamu sedang memakai akun mana di sistem Linux, terutama kalau ada banyak user atau saat berpindah ke root.
 
@@ -251,14 +258,13 @@ levi         557  0.0  0.0   3124  1664 pts/0    S    16:27   0:00 sleep 1000
 
 -
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+- Jelaskan makna hasil percobaan.
+Makna percobaan ini adalah untuk memahami identitas user, hak akses, dan proses yang berjalan di sistem Linux. Dengan perintah seperti whoami, groups, dan id, pengguna dapat mengetahui akun serta izin yang dimiliki, sedangkan ps aux dan top membantu memantau aktivitas proses secara real-time sehingga pengguna bisa mengelola, menganalisis, dan mengontrol kinerja sistem dengan lebih efektif.
 
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Kesimpulan dari percobaan ini adalah bahwa manajemen user dan pemantauan proses sangat penting dalam sistem Linux. Melalui perintah seperti whoami, groups, dan id, pengguna dapat mengetahui identitas serta hak aksesnya, sedangkan ps aux dan top memungkinkan pengguna memantau kinerja dan aktivitas proses, sehingga membantu menjaga stabilitas, keamanan, dan efisiensi sistem.
 
 ---
 Tugas & Quiz
@@ -414,8 +420,8 @@ Perintah di atas dijalankan dengan hak root hanya untuk saat itu saja.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini? = memahami manajemen proses and user
+- Bagaimana cara Anda mengatasinya? = dengan cara belajar otodidak lewat internet dan mencari sumber sumber di internet
 
 ---
 
