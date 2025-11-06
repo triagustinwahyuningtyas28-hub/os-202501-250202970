@@ -203,9 +203,15 @@ Algoritma FCFS (First Come First Served) bekerja berdasarkan urutan kedatangan p
 
 **JAWABAN**
 
-1. 
+1. <img width="1135" height="508" alt="Screenshot 2025-11-06 182020" src="https://github.com/user-attachments/assets/5a9a1cd7-ba17-4d7d-90e6-cbe0e96c9f8c" />
+ 
+2. 
 
-2. di eksperimen 2.
+| Algoritma | Avg Waiting Time | Avg Turnaround Time | Kelebihan | Kekurangan |
+|------------|------------------|----------------------|------------|-------------|
+| FCFS | 8,75 | 14,75 | Sederhana dan mudah diterapkan | Tidak efisien untuk proses panjang |
+| SJF | 8,5 | 14,5 | Optimal untuk job pendek | Menyebabkan *starvation* pada job panjang |
+
 
 3. 1. FCFS (First Come First Served)
 
