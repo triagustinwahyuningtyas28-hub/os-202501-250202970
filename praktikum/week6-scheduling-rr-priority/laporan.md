@@ -1,11 +1,11 @@
 
-# Laporan Praktikum Minggu [X]
-Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
+# Laporan Praktikum Minggu [6]
+Topik: Penjadwalan CPU – Round Robin (RR) dan Priority Scheduling
 
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
+- **Nama**  : Tri Agustin Wahyuningtyas  
 - **NIM**   : [NIM Mahasiswa]  
 - **Kelas** : [Kelas]
 
