@@ -192,8 +192,17 @@ FCFS dan SJF FCFS bekerja dengan mengeksekusi proses berdasarkan urutan kedatang
 
 **JAWABAN**
 
-1. 
-2. DI EKSPERIMEN 2
+1. BB
+
+<img width="1287" height="630" alt="Screenshot 2025-11-06 180158" src="https://github.com/user-attachments/assets/4fdd6f8f-5653-4fe5-8e5d-cfbec81afe5a" />
+
+ 
+2.
+| Algoritma | Avg Waiting Time | Avg Turnaround Time | Kelebihan | Kekurangan |
+|------------|------------------|----------------------|------------|-------------|
+| FCFS | 8,75 | 14,75 | Sederhana dan mudah diterapkan | Tidak efisien untuk proses panjang |
+| SJF | 8,5 | 14,5 | Optimal untuk job pendek | Menyebabkan *starvation* pada job panjang |
+
 3. FCFS (First Come First Served)
 
 Kelebihan: Sederhana, adil berdasarkan urutan datang, dan mudah diterapkan.
