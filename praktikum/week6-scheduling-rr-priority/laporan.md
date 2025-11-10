@@ -28,6 +28,14 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Langkah Praktikum
+1. langkah-langkah yang digunakan.
+2. perintah yang dijalankan.
+3. file dan kode yang dibuat.
+4. commit message yang digunakan.
+
+---
+
+## kode / perintah
 1. **Siapkan Data Proses**
    Gunakan contoh data berikut (boleh dimodifikasi sesuai kebutuhan):
    | Proses | Burst Time | Arrival Time | Priority |
