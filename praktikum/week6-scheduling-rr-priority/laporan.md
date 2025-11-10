@@ -110,12 +110,10 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 ---
 
 ## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
-2. [Pertanyaan 2]  
-   **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+Tuliskan jawaban di bagian **Quiz** pada laporan:
+1. Apa perbedaan utama antara Round Robin dan Priority Scheduling?  
+2. Apa pengaruh besar/kecilnya *time quantum* terhadap performa sistem?  
+3. Mengapa algoritma Priority dapat menyebabkan *starvation*?  
 
 ---
 
