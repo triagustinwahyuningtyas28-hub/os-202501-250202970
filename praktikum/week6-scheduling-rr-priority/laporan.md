@@ -117,7 +117,14 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ---
 
-## Quiz
+## Tugas & Quiz
+
+**Tugas**
+1. Hitung waiting time dan turnaround time untuk algoritma RR dan Priority.
+2. Sajikan hasil perhitungan dan Gantt Chart dalam laporan.md.
+3. Bandingkan performa dan jelaskan pengaruh time quantum serta prioritas.
+4. Simpan semua bukti (tabel, grafik, atau gambar) ke folder screenshots/.
+
 Tuliskan jawaban di bagian **Quiz** pada laporan:
 1. Apa perbedaan utama antara Round Robin dan Priority Scheduling?  **jawab** Round Robin (RR): Setiap proses mendapat jatah waktu (time quantum) yang sama secara bergiliran, tanpa melihat prioritas.
 Priority Scheduling: Proses dijalankan berdasarkan tingkat prioritas, bukan urutan kedatangan atau waktu giliran.
