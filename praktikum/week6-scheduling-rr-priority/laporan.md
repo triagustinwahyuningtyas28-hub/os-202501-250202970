@@ -119,9 +119,11 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Quiz
 Tuliskan jawaban di bagian **Quiz** pada laporan:
-1. Apa perbedaan utama antara Round Robin dan Priority Scheduling?  
-2. Apa pengaruh besar/kecilnya *time quantum* terhadap performa sistem?  
-3. Mengapa algoritma Priority dapat menyebabkan *starvation*?  
+1. Apa perbedaan utama antara Round Robin dan Priority Scheduling?  **jawab** Round Robin (RR): Setiap proses mendapat jatah waktu (time quantum) yang sama secara bergiliran, tanpa melihat prioritas.
+Priority Scheduling: Proses dijalankan berdasarkan tingkat prioritas, bukan urutan kedatangan atau waktu giliran.
+2. Apa pengaruh besar/kecilnya *time quantum* terhadap performa sistem?  **jawab** Time quantum terlalu kecil: sistem sering melakukan context switching, sehingga overhead meningkat dan efisiensi menurun.
+Time quantum terlalu besar: proses pendek harus menunggu lama, sehingga waktu respons menjadi buruk.
+3. Mengapa algoritma Priority dapat menyebabkan *starvation*? **jawab** Algoritma Priority dapat menyebabkan starvation karena proses dengan prioritas rendah bisa terus tertunda jika selalu ada proses berprioritas lebih tinggi yang masuk ke antrian. 
 
 ---
 
