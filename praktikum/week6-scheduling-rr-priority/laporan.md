@@ -108,7 +108,13 @@ Sertakan screenshot hasil percobaan atau diagram:
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Priority (non-preemptive) pada dataset contoh ini memberikan rata-rata waiting time dan turnaround time lebih baik dibandingkan RR (q=3), karena proses dipilih berdasarkan prioritas sehingga proses penting cepat selesai. Namun, algoritma ini berisiko starvation untuk prioritas rendah jika prioritas tinggi terus datang.
+
+Round Robin adil ke semua proses (time-sharing) tetapi sensitif terhadap pemilihan quantum. Quantum terlalu kecil meningkatkan jumlah context switch dan dapat menaikkan waiting time; quantum terlalu besar mendekati FCFS sehingga mengurangi keadilan.
+
+Praktis: Untuk sistem interaktif, RR dengan quantum kecil (responsif) sering dipilih; untuk sistem di mana beberapa proses harus diprioritaskan (mis. real-time soft), gunakan Priority (atau Priority dengan aging untuk menghindari starvation).
+
+Pada data contoh ini memilih Priority non-preemptive menghasilkan Avg WT=5.25 vs RR(q=3) Avg WT=8.50 — artinya Priority lebih efisien secara rata-rata di kasus ini.
 
 ---
 ### Tugas
