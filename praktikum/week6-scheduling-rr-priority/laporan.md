@@ -155,9 +155,7 @@ Sertakan screenshot hasil percobaan atau diagram:
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+
 
 ---
 
@@ -176,6 +174,104 @@ Pada data contoh ini memilih Priority non-preemptive menghasilkan Avg WT=5.25 vs
 2. Sajikan hasil perhitungan dan Gantt Chart dalam `laporan.md`.  
 3. Bandingkan performa dan jelaskan pengaruh *time quantum* serta prioritas.  
 4. Simpan semua bukti (tabel, grafik, atau gambar) ke folder `screenshots/`
+
+WT dan TAT RR dan Priority
+
+Round Robin
+   | Proses |   CT   | Arivaal| TAT(ct-at) |	WT(TAT-bt) |
+   | :----: | :----: | :----: | :--------: | :--------: |
+   |   P1   |	 14   |    0   |	14-0=14   |	14-5=9     |
+   |   P2   |   6 	|    1	|  6-1=5	    | 5-3=2      |
+   |   P3	|   22   |	  2   |	22-2=20   |	20-8=12    |
+   |   P4	|   20   |    3	|  20-3=17   |	17-6=11    |
+Rata rata TAT:14
+Rata rata WT :8,5
+
+Priority
+|Proses|	BT | AT |PRIO|	ST |	WT(ST-AT)	|TAT(WT+BT)|
+|:----:|:--:|:--:|:--:|:--:|:------------:|:--------:|
+|  P1  |	 5 | 0  |  2 |	0  |	   0        | 	  5     |
+|  P2  |	 3 | 1  |  1 |	5  | 	   4        |	  7     |
+|  P4  |	 6 | 3  |  3 |	8  |	   5        |	  11    |
+|  P3  |	 8 | 2  |  4 |	14 |     12       |    20    |
+
+Rata rata WT  :5,25
+Rata rata TAT :10,75
+
+Perbandingan Umum Antara Round Robin & Priority Scheduling
+A. Round Robin (RR)
+
+Karakteristik:
+Setiap proses mendapat jatah waktu (time quantum) sama.
+Bersifat fair untuk semua proses.
+Cocok untuk sistem time-sharing (misal OS modern).
+
+Kelebihan:
+Tidak ada proses yang menunggu terlalu lama.
+Responsif untuk interaktif.
+
+Kekurangan:
+Terlalu banyak context switching jika time quantum terlalu kecil.
+Waktu penyelesaian (turnaround time) proses panjang bisa memburuk.
+
+Performa dipengaruhi oleh:
+Besar time quantum.
+
+B. Priority Scheduling
+
+Karakteristik:
+Proses dijalankan berdasarkan tingkat prioritas.
+Prioritas tinggi dieksekusi lebih awal.
+
+Kelebihan:
+Baik untuk tugas yang memang harus diprioritaskan (real-time).
+Turnaround time untuk proses berprioritas tinggi sangat baik.
+
+Kekurangan:
+Dapat terjadi starvation (proses prioritas rendah tidak kebagian CPU).
+Performa sangat tergantung mekanisme aging atau tidak.
+
+Performa dipengaruhi oleh:
+Besaran prioritas.
+Ada/tidaknya aging.
+
+2. Pengaruh Time Quantum dalam Round Robin
+Time quantum terlalu kecil
+
+Context switching sangat sering → overhead besar → CPU boros waktu.
+Sistem sangat responsif, tapi performa global menurun.
+Cocok untuk sistem interaktif, tidak cocok untuk beban berat.
+
+Time quantum terlalu besar
+Round Robin mendekati FCFS.
+Respons interaktif buruk (delay besar).
+Waiting time untuk proses bisa meningkat.
+Time quantum ideal
+Biasanya 10–100 ms di sistem nyata.
+
+Ciri ideal:
+Tidak terjadi context switching berlebihan.
+Respons tetap cepat.
+Throughput stabil.
+
+3. Pengaruh Prioritas (Priority Scheduling)
+Prioritas tinggi → proses lebih cepat selesai
+Proses penting diselesaikan lebih awal.
+Turnaround time untuk proses tinggi menurun.
+
+Proses prioritas rendah bisa kelaparan (starvation)
+Jika tidak ada mekanisme aging, proses rendah bisa:
+Menunggu sangat lama.
+Bahkan tidak pernah dieksekusi.
+
+Dengan Aging
+Prioritas proses bertambah seiring waktu → starvation hilang.
+
+Preemptive vs Non-preemptive
+Preemptive: proses dengan prioritas lebih tinggi bisa langsung menghentikan proses yang berjalan.
+Non-preemptive: proses berjalan sampai selesai/menunggu, baru digantikan.
+
+
 
 ## Quiz
 1. Apa perbedaan utama antara Round Robin dan Priority Scheduling?
