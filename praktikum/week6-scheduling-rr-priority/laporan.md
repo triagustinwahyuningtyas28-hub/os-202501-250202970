@@ -149,13 +149,19 @@ Quantum 5
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+
 
 ---
 
 ## Analisis
+Berdasarkan hasil perhitungan, Priority Scheduling (non-preemptive) menghasilkan rata-rata waiting time dan turnaround time yang lebih rendah dibandingkan Round Robin (q = 3). Hal ini terjadi karena proses dengan prioritas tinggi dieksekusi lebih awal sehingga mengurangi waktu tunggu proses penting. Sebaliknya, Round Robin memberikan giliran merata kepada semua proses sehingga proses panjang membutuhkan lebih banyak putaran sebelum selesai, yang menyebabkan waktu tunggu rata-rata lebih tinggi.
 
+Pemilihan time quantum sangat memengaruhi performa RR. Quantum kecil menyebabkan banyak context switching sehingga waiting time meningkat, sedangkan quantum besar membuat RR mendekati FCFS dan mengurangi keadilan proses. Hasil eksperimen menunjukkan bahwa q=5 lebih efisien daripada q=2 dan q=3 pada dataset ini.
+Pada Priority Scheduling, penggunaan prioritas membuat proses tertentu selesai lebih cepat, tetapi dapat menimbulkan starvation pada proses berprioritas rendah jika tidak ada mekanisme aging.
+
+Secara keseluruhan:
+RR lebih adil, tetapi sensitif terhadap pemilihan quantum.
+Priority lebih efisien, tetapi berisiko menyebabkan starvation.
 
 ---
 
