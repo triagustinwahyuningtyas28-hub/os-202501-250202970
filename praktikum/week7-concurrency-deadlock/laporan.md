@@ -181,7 +181,11 @@ import time
 import random
 
 NUM_PHILOSOPHERS = 5
+
+# Lock untuk setiap garpu
 forks = [threading.Lock() for _ in range(NUM_PHILOSOPHERS)]
+
+# Membatasi maksimal 4 filosof yang boleh mencoba makan (mencegah deadlock)
 max_eaters = threading.Semaphore(4)
 
 def philosopher(i):
@@ -189,11 +193,14 @@ def philosopher(i):
     right = (i + 1) % NUM_PHILOSOPHERS
 
     while True:
+        # Fase berpikir
         print(f"Philosopher {i} is thinking")
         time.sleep(random.uniform(0.2, 0.6))
 
+        # Hanya 4 filosof boleh mencoba makan sekaligus
         max_eaters.acquire()
 
+        # Menghindari deadlock dengan aturan pengambilan garpu
         if i == NUM_PHILOSOPHERS - 1:
             forks[right].acquire()
             forks[left].acquire()
@@ -201,12 +208,29 @@ def philosopher(i):
             forks[left].acquire()
             forks[right].acquire()
 
+        # Fase makan
         print(f"Philosopher {i} is eating")
         time.sleep(random.uniform(0.2, 0.5))
 
+        # Letakkan garpu
         forks[left].release()
         forks[right].release()
+
+        # Izinkan filosof lain makan
         max_eaters.release()
+
+
+# Membuat dan menjalankan thread untuk setiap filosof
+threads = []
+for i in range(NUM_PHILOSOPHERS):
+    t = threading.Thread(target=philosopher, args=(i,))
+    t.daemon = True
+    threads.append(t)
+    t.start()
+
+# Menjaga program tetap hidup
+for t in threads:
+    t.join()
 
 
 ```
