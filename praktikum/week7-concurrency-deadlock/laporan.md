@@ -288,6 +288,11 @@ Dengan pola ini, urutan permintaan resource tidak lagi membentuk lingkaran.
 
 ## Hasil Simulasi
 Sertakan screenshot hasil percobaan atau diagram:
+![IMG-20251125-WA0004](https://github.com/user-attachments/assets/42945710-1590-484a-b2dd-b00b00b596fb)
+![IMG-20251125-WA0003](https://github.com/user-attachments/assets/e33810f3-6061-4686-95b9-6d9f6d7626d8)
+![IMG-20251125-WA0002](https://github.com/user-attachments/assets/ce427c3c-5676-4106-9957-66e34f0d0a1f)
+![IMG-20251125-WA0001](https://github.com/user-attachments/assets/92ca6b4b-6f04-464e-abb1-aba33956f78e)
+
 
 ---
 
