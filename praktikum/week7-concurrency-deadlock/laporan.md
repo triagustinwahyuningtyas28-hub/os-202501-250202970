@@ -5,7 +5,7 @@ Topik: Concurrency Deadlock
 ---
 
 ## Identitas
-- **Nama**  : tri agustin wahyuningtyas
+- **Nama**  : Tri Agustin Wahyuningtyas
 - **NIM**   : 250220970
 - **Kelas** : 1IKRA
 
