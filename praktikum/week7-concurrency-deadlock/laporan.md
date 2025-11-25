@@ -5,7 +5,7 @@ Topik: Concurrency Deadlock
 ---
 
 ## Identitas
-- **Nama**  : tri agustin wahyuningtyas
+- **Nama**  : Tri Agustin Wahyuningtyas
 - **NIM**   : 250220970
 - **Kelas** : 1IKRA
 
@@ -312,6 +312,11 @@ Dengan pola ini, urutan permintaan resource tidak lagi membentuk lingkaran.
 
 ## Hasil Simulasi
 Sertakan screenshot hasil percobaan atau diagram:
+<img width="1919" height="1199" alt="Screenshot 2025-11-25 144051" src="https://github.com/user-attachments/assets/4011ec54-783c-498a-abd7-422ba0508252" />
+<img width="1918" height="1199" alt="Screenshot 2025-11-25 144417" src="https://github.com/user-attachments/assets/873573d2-e2ba-4578-a816-90190ad232dd" />
+<img width="1919" height="1199" alt="Screenshot 2025-11-25 144436" src="https://github.com/user-attachments/assets/0cce670d-af3b-4547-9d1a-596969c61379" />
+<img width="1919" height="1199" alt="Screenshot 2025-11-25 144031" src="https://github.com/user-attachments/assets/f82d6d30-ecf0-460c-938f-73e08901c127" />
+
 
 ---
 
