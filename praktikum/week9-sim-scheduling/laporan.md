@@ -1,20 +1,22 @@
 
-# Laporan Praktikum Minggu [X]
-Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
+# Laporan Praktikum Minggu [IX]
+Topik:  Simulasi Algoritma Penjadwalan CPU
 
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
-- **NIM**   : [NIM Mahasiswa]  
-- **Kelas** : [Kelas]
+- **Nama**  : Tri Agustin Wahyuningtyas
+- **NIM**   : 250202970
+- **Kelas** : 1IKRA
 
 ---
 
 ## Tujuan
-Tuliskan tujuan praktikum minggu ini.  
-Contoh:  
-> Mahasiswa mampu menjelaskan fungsi utama sistem operasi dan peran kernel serta system call.
+1. Membuat program simulasi algoritma penjadwalan FCFS dan/atau SJF.  
+2. Menjalankan program dengan dataset uji yang diberikan atau dibuat sendiri.  
+3. Menyajikan output simulasi dalam bentuk tabel atau grafik.  
+4. Menjelaskan hasil simulasi secara tertulis.  
+5. Mengunggah kode dan laporan ke Git repository dengan rapi dan tepat waktu.
 
 ---
 
