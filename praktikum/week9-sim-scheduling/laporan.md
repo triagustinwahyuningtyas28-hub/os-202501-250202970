@@ -88,11 +88,17 @@ dmesg | head
 
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
 
----
+
+---![WhatsApp Image 2025-12-21 at 19 27 34 (2)](https://github.com/user-attachments/assets/855075c8-d933-48d9-9804-50abe7370d4d)
+
+![WhatsApp Image 2025-12-21 at 19 27 34 (3)](https://github.com/user-attachments/assets/cdb05fb7-fb51-4590-8a70-146170236070)
+
+
+
 
 ## Analisis
+
 ```
 {
   "process": "P1",
