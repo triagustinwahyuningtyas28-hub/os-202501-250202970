@@ -1,13 +1,13 @@
 
 # Laporan Praktikum Minggu [X]
-Topik: [Tuliskan judul topik, misalnya "Arsitektur Sistem Operasi dan Kernel"]
+Topik: Manajemen Memori – Page Replacement (FIFO & LRU)
 
 ---
 
 ## Identitas
-- **Nama**  : [Nama Mahasiswa]  
-- **NIM**   : [NIM Mahasiswa]  
-- **Kelas** : [Kelas]
+- **Nama**  : Tri Agustin Wahyuningtyas
+- **NIM**   : 250202970  
+- **Kelas** : 1IKRA
 
 ---
 
@@ -142,6 +142,7 @@ Algoritma page replacement FIFO dan LRU berhasil diimplementasikan dan disimulas
 Berdasarkan hasil simulasi, algoritma LRU menghasilkan jumlah page fault lebih sedikit (9) dibandingkan algoritma FIFO (10), karena LRU mempertimbangkan riwayat penggunaan halaman dan memanfaatkan prinsip lokalitas temporal.
 
 Dengan demikian, LRU lebih efisien dibanding FIFO dalam pengelolaan memori, meskipun memiliki tingkat kompleksitas implementasi yang lebih tinggi, sedangkan FIFO lebih sederhana namun kurang optimal dari sisi performa.
+
 ---
 
 ## E. Tugas & Quiz
