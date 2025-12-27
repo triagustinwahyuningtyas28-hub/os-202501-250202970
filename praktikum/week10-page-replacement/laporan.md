@@ -106,19 +106,41 @@ Sertakan screenshot hasil percobaan atau diagram:
 ## Analisis
    Buat tabel perbandingan seperti berikut:
 
-   | Algoritma | Jumlah Page Fault | Keterangan |
-   |:--|:--:|:--|
-   | FIFO | ... | ... |
-   | LRU | ... | ... |
+| Algoritma | Jumlah Page Fault | Keterangan                                                                                             |
+| :-------- | :---------------: | :----------------------------------------------------------------------------------------------------- |
+| **FIFO**  |       **10**      | Mengganti halaman yang paling awal masuk ke memori tanpa memperhatikan frekuensi atau waktu penggunaan |
+| **LRU**   |       **9**       | Mengganti halaman yang paling lama tidak digunakan sehingga lebih sesuai dengan pola akses program     |
 
 
    - Jelaskan mengapa jumlah *page fault* bisa berbeda.
+
+perbedaan jumlah page fault terjadi karena cara masing-masing algoritma menentukan halaman yang diganti:
+
+FIFO hanya melihat urutan kedatangan halaman.
+Akibatnya, halaman yang masih sering digunakan bisa saja dikeluarkan dari memori hanya karena datang lebih awal.
+
+LRU mempertimbangkan riwayat penggunaan halaman.
+Halaman yang baru saja digunakan akan dipertahankan, sedangkan yang lama tidak digunakan akan diganti.
+
+Karena pola akses program umumnya memiliki lokalitas temporal (halaman yang sering dipakai akan dipakai lagi), LRU lebih mampu menyesuaikan diri dengan kebutuhan program.
+
    - Analisis algoritma mana yang lebih efisien dan alasannya.
+
+Berdasarkan hasil simulasi, LRU menghasilkan jumlah page fault lebih sedikit (9) dibandingkan FIFO (10).
+
+Hal ini menunjukkan bahwa LRU lebih efisien dalam penggunaan memori karena:
+- Mempertahankan halaman yang sering digunakan
+- Mengurangi kemungkinan terjadinya page fault berulang
+- Tidak mengalami Belady’s Anomaly
+
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Algoritma page replacement FIFO dan LRU berhasil diimplementasikan dan disimulasikan menggunakan reference string dengan 3 frame memori, sehingga proses penggantian halaman dapat diamati secara jelas.
 
+Berdasarkan hasil simulasi, algoritma LRU menghasilkan jumlah page fault lebih sedikit (9) dibandingkan algoritma FIFO (10), karena LRU mempertimbangkan riwayat penggunaan halaman dan memanfaatkan prinsip lokalitas temporal.
+
+Dengan demikian, LRU lebih efisien dibanding FIFO dalam pengelolaan memori, meskipun memiliki tingkat kompleksitas implementasi yang lebih tinggi, sedangkan FIFO lebih sederhana namun kurang optimal dari sisi performa.
 ---
 
 ## E. Tugas & Quiz
