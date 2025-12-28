@@ -337,6 +337,14 @@ Melalui praktikum ini, diperoleh pemahaman yang lebih baik mengenai cara kerja p
 
 ---
 
+## Tugas & Quiz
+
+### Tugas
+1. Buat program simulasi FCFS atau SJF.  
+2. Jalankan program dengan dataset uji.  
+3. Sajikan output dalam tabel atau grafik.  
+4. Tulis laporan praktikum pada `laporan.md`.
+
 ## Quiz
 1. Mengapa simulasi diperlukan untuk menguji algoritma scheduling?
    **Jawaban** Simulasi diperlukan untuk menguji algoritma scheduling karena dapat meniru kondisi kerja CPU tanpa harus menggunakan sistem nyata. Dengan simulasi, kinerja algoritma dapat dibandingkan secara adil, seperti waiting time dan turnaround time, serta memudahkan analisis, pembelajaran, dan mengurangi risiko kesalahan pada sistem sebenarnya.
