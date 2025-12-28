@@ -145,7 +145,7 @@ Dengan demikian, LRU lebih efisien dibanding FIFO dalam pengelolaan memori, mesk
 
 ---
 
-## E. Tugas & Quiz
+## Tugas & Quiz
 ### Tugas
 1. Buat program simulasi page replacement FIFO dan LRU.
 2. Jalankan simulasi dengan dataset uji.
