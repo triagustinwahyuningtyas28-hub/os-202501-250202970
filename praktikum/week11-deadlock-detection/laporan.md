@@ -98,13 +98,46 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ---
 
+## Tugas & Quiz
+### Tugas
+1. Buat program simulasi deteksi deadlock.  
+2. Jalankan program dengan dataset uji.  
+3. Sajikan hasil analisis dalam tabel dan narasi.  
+4. Tulis laporan praktikum pada `laporan.md`.
+
 ## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
-2. [Pertanyaan 2]  
-   **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+1.Apa perbedaan antara deadlock prevention, avoidance, dan detection? 
+   **Jawaban:**  Perbedaan Deadlock Prevention, Avoidance, dan Detection
+
+1. Deadlock Prevention
+Mencegah deadlock sebelum terjadi dengan menghilangkan salah satu kondisi deadlock.
+➜ Deadlock tidak mungkin terjadi, tetapi kurang efisien.
+
+2. Deadlock Avoidance
+Menghindari deadlock dengan mengecek kondisi sistem saat alokasi resource (misalnya Banker’s Algorithm).
+➜ Lebih efisien, tetapi butuh informasi lengkap resource.
+
+3. Deadlock Detection
+Membiarkan deadlock terjadi lalu mendeteksi dan memulihkannya.
+➜ Resource efisien, tetapi proses bisa terganggu.
+
+2.Mengapa deteksi deadlock tetap diperlukan dalam sistem operasi? 
+   **Jawaban:** 
+   
+   Deteksi deadlock tetap diperlukan karena deadlock tidak selalu bisa dicegah atau dihindari tanpa menurunkan kinerja sistem. Sistem operasi yang dinamis membutuhkan pemakaian resource secara efisien, dan jika deadlock terjadi, deteksi memungkinkan sistem menemukan dan memulihkannya agar tidak berhenti total.
+   
+3. Apa kelebihan dan kekurangan pendekatan deteksi deadlock?
+   **Jawaban:**
+
+Kelebihan deteksi deadlock
+-Pemanfaatan resource lebih efisien.
+-Tidak membatasi alokasi resource di awal.
+-Cocok untuk sistem yang dinamis.
+
+Kekurangan deteksi deadlock:
+-Deadlock tetap bisa terjadi.
+-Membutuhkan proses deteksi tambahan.
+-Pemulihan dapat menghentikan proses atau menyebabkan kehilangan data.
 
 ---
 
