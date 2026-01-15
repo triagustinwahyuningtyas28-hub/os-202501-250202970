@@ -71,6 +71,7 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Kode / Perintah
+```
 import csv
 import os
 from collections import defaultdict
@@ -100,7 +101,7 @@ def build_wait_for_graph(processes, allocation, request):
                     wfg[p1].append(p2)
 
     return wfg
-```
+    
 def detect_cycle(wfg, processes):
     visited = set()
     stack = set()
@@ -139,9 +140,10 @@ def detect_cycle(wfg, processes):
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+   - Sajikan hasil deteksi dalam tabel (proses deadlock / tidak).  
+   - Jelaskan mengapa deadlock terjadi atau tidak terjadi.  
+   - Kaitkan hasil dengan teori deadlock (empat kondisi).
+ 
 
 ---
 
