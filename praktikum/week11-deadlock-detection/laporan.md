@@ -71,18 +71,70 @@ Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 ---
 
 ## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
+import csv
+import os
+from collections import defaultdict
+
+def read_dataset(filename):
+    processes = []
+    allocation = {}
+    request = {}
+
+    with open(filename, 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            p = row['Process']
+            processes.append(p)
+            allocation[p] = row['Allocation']
+            request[p] = row['Request']
+
+    return processes, allocation, request
+
+def build_wait_for_graph(processes, allocation, request):
+    wfg = defaultdict(list)
+
+    for p1 in processes:
+        for p2 in processes:
+            if p1 != p2:
+                if request[p1] == allocation[p2]:
+                    wfg[p1].append(p2)
+
+    return wfg
+```
+def detect_cycle(wfg, processes):
+    visited = set()
+    stack = set()
+    deadlock_processes = set()
+
+    def dfs(p):
+        if p in stack:
+            deadlock_processes.update(stack)
+            return True
+        if p in visited:
+            return False
+
+        visited.add(p)
+        stack.add(p)
+
+        for neighbor in wfg[p]:
+            if dfs(neighbor):
+                return True
+
+        stack.remove(p)
+        return False
+
+    for p in processes:
+        if dfs(p):
+            break
+
+    return deadlock_processes
+
 ```
 
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+<img width="848" height="316" alt="Screenshot 2026-01-15 200842" src="https://github.com/user-attachments/assets/8e9e9c25-691c-4c5a-a475-09478bd4990c" />
 
 ---
 
