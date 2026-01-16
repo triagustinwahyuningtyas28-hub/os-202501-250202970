@@ -24,6 +24,21 @@ Topik : Simulasi dan Deteksi Deadlock
 ## Dasar Teori
 Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
 
+Deadlock dalam Sistem Operasi
+Deadlock adalah kondisi ketika dua atau lebih proses saling menunggu sumber daya yang sedang dipegang proses lain, sehingga tidak ada satu pun proses yang dapat melanjutkan eksekusinya.
+
+Empat Kondisi Terjadinya Deadlock
+Deadlock hanya dapat terjadi jika keempat kondisi berikut terpenuhi secara bersamaan: mutual exclusion (resource tidak dapat dipakai bersama), hold and wait (proses memegang resource sambil menunggu resource lain), no preemption (resource tidak dapat direbut paksa), dan circular wait (terdapat siklus ketergantungan antar proses).
+
+Deteksi Deadlock
+Deteksi deadlock dilakukan dengan membiarkan sistem berjalan normal, lalu secara periodik memeriksa apakah terdapat siklus ketergantungan antara proses dan resource menggunakan algoritma atau graph ketergantungan.
+
+Algoritma Deteksi Deadlock
+Algoritma deteksi deadlock memanfaatkan informasi resource allocation dan resource request untuk menentukan proses mana yang tidak dapat diselesaikan. Jika tidak ada proses yang dapat dilanjutkan, maka sistem berada dalam kondisi deadlock.
+
+Peran Dataset dan Simulasi
+Dataset proses dan resource digunakan untuk mensimulasikan kondisi sistem nyata, sehingga mahasiswa dapat menganalisis secara logis apakah deadlock terjadi dan proses apa saja yang terlibat.
+
 ---
 
 ## Langkah Praktikum
