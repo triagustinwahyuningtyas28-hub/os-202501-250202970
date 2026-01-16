@@ -1,5 +1,5 @@
 
-# Laporan Praktikum Minggu [X]
+# Laporan Praktikum Minggu [XII]
 Topik: Virtualisasi Menggunakan Virtual Machine
 ---
 
@@ -103,12 +103,13 @@ Jawab pada bagian **Quiz** di laporan:
  **Jawaban:**  Host OS adalah sistem operasi utama yang terpasang langsung di hardware dan mengelola seluruh sumber daya komputer.
 Guest OS adalah sistem operasi yang berjalan di dalam mesin virtual, menggunakan sumber daya yang dialokasikan oleh Host OS.
 Contoh:
-Windows di laptop = Host OS
-Ubuntu yang dijalankan lewat VirtualBox = Guest OS
+- Windows di laptop = Host OS
+- Ubuntu yang dijalankan lewat VirtualBox = Guest OS
 
 2. Apa peran hypervisor dalam virtualisasi?
  **Jawaban:**  Hypervisor berperan sebagai pengelola virtualisasi yang memungkinkan beberapa Guest OS berjalan secara bersamaan di satu komputer fisik.
-Peran utama hypervisor:
+   
+  Peran utama hypervisor:
 - Mengalokasikan dan mengatur CPU, RAM, dan storage untuk tiap mesin virtual
 - Menjadi perantara antara hardware dan Guest OS
 -Menjaga isolasi agar satu mesin virtual tidak mengganggu yang lain
