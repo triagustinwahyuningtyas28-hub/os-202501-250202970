@@ -1,134 +1,148 @@
+# Laporan Praktikum Minggu XII
 
-# Laporan Praktikum Minggu [XII]
-Topik: Virtualisasi Menggunakan Virtual Machine
----
-
-## Identitas
-- **Nama**  : Tri Agustin Wahyuningtyas
-- **NIM**   : 250202970
-- **Kelas** : 1IKRA
+## Virtualisasi Menggunakan Virtual Machine
 
 ---
 
-## Tujuan
-1. Menginstal perangkat lunak virtualisasi (VirtualBox/VMware).  
-2. Membuat dan menjalankan sistem operasi guest di dalam VM.  
-3. Mengatur konfigurasi resource VM (CPU, RAM, storage).  
-4. Menjelaskan mekanisme proteksi OS melalui virtualisasi.  
-5. Menyusun laporan praktikum instalasi dan konfigurasi VM secara sistematis.
+### Identitas Kelompok
+
+* Mata Kuliah : Sistem Operasi
+* Topik       : Virtualisasi Menggunakan Virtual Machine
+* Minggu      : 12
+* Anggota     : Muhammad Reza Fahlevi (250202955)
+              : tri agustin wahyuningtyas (250202970)
+              : amarudin ibnu salam (250202929)
 
 ---
 
-## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
+## A. Pendahuluan
+
+Virtualisasi merupakan teknologi yang memungkinkan sebuah sistem komputer menjalankan lebih dari satu sistem operasi secara bersamaan pada satu perangkat keras fisik. Pada praktikum ini digunakan **Virtual Machine (VM)** untuk menginstal dan menjalankan sistem operasi guest di atas sistem operasi host menggunakan aplikasi virtualisasi.
+
+Praktikum ini bertujuan untuk memahami hubungan antara **host OS**, **guest OS**, dan **hypervisor**, serta bagaimana pengaturan resource seperti CPU, RAM, dan storage memengaruhi kinerja sistem.
 
 ---
 
-## Langkah Praktikum
-1. **Instalasi Virtual Machine**
-   - Instal VirtualBox atau VMware pada komputer host.  
-   - Pastikan fitur virtualisasi (VT-x / AMD-V) aktif di BIOS.
+## B. Tujuan Praktikum
 
-2. **Pembuatan OS Guest**
-   - Buat VM baru dan pilih OS guest (misal: Ubuntu Linux).  
-   - Atur resource awal:
-     - CPU: 1–2 core  
-     - RAM: 2–4 GB  
-     - Storage: ≥ 20 GB
+1. Menginstal software virtualisasi (VirtualBox/VMware).
+2. Membuat dan menjalankan OS guest pada VM.
+3. Mengatur konfigurasi resource VM.
+4. Memahami mekanisme isolasi dan proteksi OS melalui virtualisasi.
+5. Menyusun laporan praktikum secara sistematis.
 
-3. **Instalasi Sistem Operasi**
-   - Jalankan proses instalasi OS guest sampai selesai.  
-   - Pastikan OS guest dapat login dan berjalan normal.
+---
 
-4. **Konfigurasi Resource**
-   - Ubah konfigurasi CPU dan RAM.  
-   - Amati perbedaan performa sebelum dan sesudah perubahan resource.
+## C. Alat dan Bahan
 
-5. **Analisis Proteksi OS**
-   - Jelaskan bagaimana VM menyediakan isolasi antara host dan guest.  
-   - Kaitkan dengan konsep *sandboxing* dan *hardening* OS.
+* PC
+* Sistem Operasi Host: Windows 11
+* Software Virtualisasi: **Oracle VirtualBox**
+* File ISO OS Guest: **windows**
+* Koneksi internet
 
-6. **Dokumentasi**
-   - Ambil screenshot setiap tahap penting.  
-   - Simpan di folder `screenshots/`.
+---
 
-7. **Commit & Push**
-   ```bash
-   git add .
-   git commit -m "Minggu 12 - Virtual Machine"
-   git push origin main
-   ```
+## D. Langkah Praktikum
+
+### 1. Instalasi VirtualBox
+
+1. Mengunduh Oracle VirtualBox dari situs resmi.
+2. Melakukan proses instalasi hingga selesai.
+3. Mengaktifkan fitur virtualisasi (VT-x / AMD-V) melalui BIOS.
+
+<img width="1920" height="1080" alt="Screenshot 2026-01-14 234158" src="https://github.com/user-attachments/assets/929e684a-983d-422d-a445-b219f48556e4" />
 
 
 ---
 
-## Kode / Perintah
-Tuliskan potongan kode atau perintah utama:
-```bash
-uname -a
-lsmod | head
-dmesg | head
-```
+### 2. Pembuatan Virtual Machine
+
+1. Membuka aplikasi VirtualBox.
+2. Membuat VM baru dengan spesifikasi:
+
+   * Nama VM: windows 10
+   * Tipe OS: windows
+   * Versi: 10 2h22
+3. Mengatur resource awal:
+
+   * CPU: 8 Core
+   * RAM: 8048 MB
+   * Storage: 50 GB (nvme)
+
+<img width="1900" height="1047" alt="Screenshot 2026-01-15 001158" src="https://github.com/user-attachments/assets/4edfcdb8-d14c-4a3c-9412-168d8a68d099" />
+<img width="1919" height="1079" alt="Screenshot 2026-01-15 001101" src="https://github.com/user-attachments/assets/f26aca65-3f9e-45bc-ac47-1e63e12b862a" />
+<img width="1919" height="1079" alt="Screenshot 2026-01-15 001115" src="https://github.com/user-attachments/assets/2c1ad9eb-c9df-4095-8608-21601f0c9b32" />
+<img width="1906" height="1076" alt="Screenshot 2026-01-15 001145" src="https://github.com/user-attachments/assets/e938f9ab-14c1-41de-9b89-53d6665a3661" />
+
 
 ---
 
-## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+### 3. Instalasi OS Guest
+
+1. Menjalankan VM.
+2. Memilih file ISO windows sebagai media instalasi.
+3. Mengikuti langkah instalasi hingga selesai.
+4. Melakukan login dan memastikan OS berjalan normal.
+
+<img width="1919" height="1079" alt="Screenshot 2026-01-15 001430" src="https://github.com/user-attachments/assets/af59ec04-e3b4-4a41-88f3-2ca1c4dbbb7f" />
+<img width="1919" height="1079" alt="Screenshot 2026-01-15 001555" src="https://github.com/user-attachments/assets/3d9d84fd-41fb-4688-ad95-222424ec55c2" />
+<img width="1891" height="1065" alt="Screenshot 2026-01-15 001715" src="https://github.com/user-attachments/assets/dba98ca0-190b-4615-8246-1010c8efa4ed" />
+<img width="1919" height="1079" alt="Screenshot 2026-01-15 001805" src="https://github.com/user-attachments/assets/ec2069d7-74ad-48dc-a0f2-e63ba89b70e0" />
+<img width="1901" height="1067" alt="Screenshot 2026-01-15 002030" src="https://github.com/user-attachments/assets/b59c17e1-cecc-46eb-9dc5-ad2ac8afcedc" />
+<img width="1909" height="1074" alt="Screenshot 2026-01-15 002436" src="https://github.com/user-attachments/assets/4fb22d23-775d-4245-8f1d-1fa1d6270334" />
+
 
 ---
 
-## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+### 4. Konfigurasi Resource VM
+
+* Sebelum perubahan: 8 Core CPU dan 8 GB RAM.
+* Setelah perubahan: 6 Core CPU dan 5 GB RAM.
+
+**Hasil Pengamatan:**
+Setelah resource ditingkatkan, performa VM menjadi lebih responsif, proses booting lebih cepat, dan aplikasi berjalan lebih lancar.
+
+<img width="1907" height="1074" alt="Screenshot 2026-01-15 002639" src="https://github.com/user-attachments/assets/437b1d17-fe79-4aa9-90f6-b170ebf570ef" />
+<img width="1864" height="1044" alt="Screenshot 2026-01-15 004103" src="https://github.com/user-attachments/assets/13dce7cb-3a43-4a59-b849-872773d8a995" />
+<img width="1903" height="1069" alt="Screenshot 2026-01-15 004227" src="https://github.com/user-attachments/assets/b8678e5a-3eea-4302-b0f0-7847288ab559" />
+
 
 ---
 
-## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+## E. Analisis Proteksi OS
+
+Virtual Machine menyediakan **isolasi** antara sistem host dan guest. Jika terjadi error atau malware pada OS guest, maka tidak akan langsung memengaruhi OS host.
+
+Konsep ini mirip dengan **sandboxing**, di mana sistem guest berjalan dalam lingkungan terisolasi. Selain itu, virtualisasi juga mendukung **hardening OS**, karena setiap VM dapat dikonfigurasi dengan kebijakan keamanan masing-masing.
 
 ---
 
-## Tugas & Quiz
-### Tugas
-1. Instal dan jalankan OS guest menggunakan VM.  
-2. Konfigurasikan resource VM sesuai instruksi.  
-3. Dokumentasikan proses instalasi dan konfigurasi.  
-4. Tulis laporan praktikum pada `laporan.md`.
+## F. Quiz
 
-### Quiz
-Jawab pada bagian **Quiz** di laporan:
-1. Apa perbedaan antara host OS dan guest OS?
- **Jawaban:**  Host OS adalah sistem operasi utama yang terpasang langsung di hardware dan mengelola seluruh sumber daya komputer.
-Guest OS adalah sistem operasi yang berjalan di dalam mesin virtual, menggunakan sumber daya yang dialokasikan oleh Host OS.
-Contoh:
-- Windows di laptop = Host OS
-- Ubuntu yang dijalankan lewat VirtualBox = Guest OS
+### 1. Apa perbedaan antara host OS dan guest OS?
 
-2. Apa peran hypervisor dalam virtualisasi?
- **Jawaban:**  Hypervisor berperan sebagai pengelola virtualisasi yang memungkinkan beberapa Guest OS berjalan secara bersamaan di satu komputer fisik.
-   
-  Peran utama hypervisor:
-- Mengalokasikan dan mengatur CPU, RAM, dan storage untuk tiap mesin virtual
-- Menjadi perantara antara hardware dan Guest OS
--Menjaga isolasi agar satu mesin virtual tidak mengganggu yang lain
+**Host OS** adalah sistem operasi utama yang berjalan langsung di atas hardware, sedangkan **guest OS** adalah sistem operasi yang berjalan di dalam virtual machine di atas host OS.
 
-3. Mengapa virtualisasi meningkatkan keamanan sistem?
- **Jawaban:**     Virtualisasi meningkatkan keamanan sistem karena:
-- Isolasi lingkungan → Setiap mesin virtual terpisah, sehingga serangan atau error di satu VM tidak langsung memengaruhi sistem lain.
-- Pembatasan akses → Guest OS tidak memiliki akses langsung ke hardware, sehingga risiko penyalahgunaan lebih kecil.
-- Pemulihan cepat → Jika sistem terinfeksi atau rusak, VM bisa dikembalikan dengan snapshot tanpa mengganggu Host OS.
-- Pengujian aman → Aplikasi atau konfigurasi berisiko dapat diuji di VM tanpa membahayakan sistem utama.
+### 2. Apa peran hypervisor dalam virtualisasi?
+
+Hypervisor berperan sebagai pengelola virtualisasi yang mengatur pembagian resource hardware (CPU, RAM, storage) antara host dan guest OS serta memastikan isolasi antar VM.
+
+### 3. Mengapa virtualisasi meningkatkan keamanan sistem?
+
+Karena virtualisasi menyediakan isolasi sistem, sehingga gangguan atau serangan pada satu VM tidak langsung memengaruhi sistem lain maupun host OS.
 
 ---
 
-## Refleksi Diri
-Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+## G. Kesimpulan
+
+Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa teknologi virtualisasi memungkinkan menjalankan beberapa sistem operasi secara bersamaan dengan aman dan efisien. Pengaturan resource yang tepat sangat memengaruhi performa VM, dan mekanisme isolasi meningkatkan keamanan sistem secara keseluruhan.
 
 ---
 
-**Credit:**  
-_Template laporan praktikum Sistem Operasi (SO-202501) – Universitas Putra Bangsa_
+## H. Referensi
+
+1. Silberschatz, A., Galvin, P., Gagne, G. *Operating System Concepts*.
+2. Tanenbaum, A. *Modern Operating Systems*.
+3. Oracle VirtualBox Documentation.
+4. OSTEP – Virtualization.
