@@ -156,7 +156,61 @@ def detect_cycle(wfg, processes):
    - Sajikan hasil deteksi dalam tabel (proses deadlock / tidak).  
    - Jelaskan mengapa deadlock terjadi atau tidak terjadi.  
    - Kaitkan hasil dengan teori deadlock (empat kondisi).
- 
+
+ **Jawaban**
+ -Hasil Deteksi Deadlock dalam Bentuk Tabel
+
+Program membangun Wait-For Graph (WFG) dan mendeteksi siklus (cycle).
+Jika suatu proses termasuk dalam siklus, maka proses tersebut deadlock.
+
+| Proses | Status         |
+| ------ | -------------- |
+| P1     | Deadlock       |
+| P2     | Deadlock       |
+| P3     | Tidak Deadlock |
+| P4     | Tidak Deadlock |
+
+-Penjelasan Mengapa Deadlock Terjadi atau Tidak Terjadi
+
+Mengapa Deadlock Terjadi
+Deadlock terjadi ketika:
+Proses saling menunggu resource satu sama lain
+Terbentuk rantai tunggu melingkar
+P1 menunggu resource P2
+P2 menunggu resource P1
+Terbentuk siklus → deadlock
+
+Mengapa Deadlock Tidak Terjadi
+Deadlock tidak terjadi jika:
+Tidak ada siklus dalam WFG
+Proses hanya menunggu proses lain, tetapi rantainya terputus
+P1 → P2 → P3
+Tidak kembali ke P1 → tidak deadlock
+
+-Kaitan dengan Teori Deadlock (Empat Kondisi Coffman)
+Deadlock hanya dapat terjadi jika keempat kondisi berikut terpenuhi secara bersamaan:
+1. Mutual Exclusion
+Terpenuhi
+Resource hanya dapat digunakan oleh satu proses pada satu waktu.
+2. Hold and Wait
+Terpenuhi
+Proses:
+Menahan resource
+Sambil menunggu resource lain
+Terlihat pada dataset:
+Proses memiliki Allocation
+Sekaligus memiliki Request
+3. No Preemption
+Terpenuhi
+Resource:
+Tidak dapat diambil paksa
+Harus dilepaskan secara sukarela oleh proses
+Program mengasumsikan resource tidak bisa direbut paksa.
+4. Circular Wait
+(penentu utama)
+Terpenuhi → Jika ditemukan siklus pada WFG → Deadlock
+Tidak terpenuhi → Jika tidak ada siklus → Tidak Deadlock
+Inilah kondisi yang dideteksi langsung oleh program melalui DFS.
 
 ---
 
