@@ -215,7 +215,11 @@ Inilah kondisi yang dideteksi langsung oleh program melalui DFS.
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Program simulasi deteksi deadlock berhasil mengidentifikasi kondisi deadlock dengan membangun Wait-For Graph dan mendeteksi adanya siklus menggunakan algoritma DFS.
+Deadlock terbukti terjadi ketika keempat kondisi Coffman terpenuhi secara bersamaan, khususnya kondisi circular wait yang menjadi indikator utama dalam proses deteksi.
+Melalui penggunaan dataset uji dan analisis hasil, praktikum ini membantu memahami konsep deadlock secara logis serta meningkatkan kemampuan mahasiswa dalam menganalisis permasalahan sinkronisasi pada sistem operasi.
+
+
 
 ---
 
