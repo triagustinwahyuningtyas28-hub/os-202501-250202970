@@ -22,6 +22,7 @@ Topik: Docker – Resource Limit (CPU & Memori)
 ---
 
 ## Dasar Teori
+
 Containerization pada Docker
 Docker menjalankan aplikasi di dalam container yang terisolasi dari sistem host, tetapi tetap berbagi kernel yang sama. Isolasi ini memungkinkan pengelolaan sumber daya yang lebih efisien dibandingkan virtual machine.
 Cgroups (Control Groups)
@@ -32,6 +33,7 @@ Pembatasan Memori
 Docker menyediakan opsi --memory untuk membatasi penggunaan RAM container. Jika container melebihi batas memori yang ditentukan, maka proses di dalamnya dapat dihentikan (OOM – Out of Memory).
 Stabilitas dan Keamanan Sistem
 Pembatasan resource pada container membantu menjaga stabilitas sistem host, mencegah resource starvation, serta meningkatkan keamanan dan keandalan aplikasi yang berjalan secara bersamaan.
+
 ---
 
 ## Langkah Praktikum
