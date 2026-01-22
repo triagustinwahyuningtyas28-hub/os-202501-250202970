@@ -96,11 +96,9 @@ Pembatasan resource pada container membantu menjaga stabilitas sistem host, menc
 ---
 
 ## Kode / Perintah
+```
 import time
 
-# =============================
-# CPU Stress Test
-# =============================
 print("=== CPU STRESS TEST DIMULAI ===")
 start_time = time.time()
 
@@ -111,9 +109,6 @@ while time.time() - start_time < 20:
 print("CPU Stress Test selesai")
 print(f"Total loop: {count}")
 
-# =============================
-# Memory Stress Test
-# =============================
 print("\n=== MEMORY STRESS TEST DIMULAI ===")
 
 memory = []
@@ -127,15 +122,10 @@ except MemoryError:
 
 print("Memory Stress Test selesai")
 
-# =============================
-# Idle supaya docker stats bisa dipantau
-# =============================
 print("\nContainer aktif untuk monitoring (Ctrl+C untuk keluar)")
 while True:
     time.sleep(1)
-
-
----
+```
 
 ## Hasil Eksekusi
 
