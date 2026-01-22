@@ -22,8 +22,16 @@ Topik: Docker – Resource Limit (CPU & Memori)
 ---
 
 ## Dasar Teori
-Tuliskan ringkasan teori (3–5 poin) yang mendasari percobaan.
-
+Containerization pada Docker
+Docker menjalankan aplikasi di dalam container yang terisolasi dari sistem host, tetapi tetap berbagi kernel yang sama. Isolasi ini memungkinkan pengelolaan sumber daya yang lebih efisien dibandingkan virtual machine.
+Cgroups (Control Groups)
+Docker memanfaatkan fitur Linux cgroups untuk membatasi dan mengontrol penggunaan sumber daya seperti CPU dan memori pada setiap container, sehingga satu container tidak menghabiskan seluruh resource host.
+Pembatasan CPU
+Resource CPU dapat dibatasi menggunakan parameter seperti --cpus atau --cpu-shares. Mekanisme ini mengatur seberapa besar jatah waktu CPU yang dapat digunakan oleh sebuah container.
+Pembatasan Memori
+Docker menyediakan opsi --memory untuk membatasi penggunaan RAM container. Jika container melebihi batas memori yang ditentukan, maka proses di dalamnya dapat dihentikan (OOM – Out of Memory).
+Stabilitas dan Keamanan Sistem
+Pembatasan resource pada container membantu menjaga stabilitas sistem host, mencegah resource starvation, serta meningkatkan keamanan dan keandalan aplikasi yang berjalan secara bersamaan.
 ---
 
 ## Langkah Praktikum
@@ -128,8 +136,6 @@ while True:
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
 
 ---
 
@@ -138,20 +144,85 @@ Sertakan screenshot hasil percobaan atau diagram:
 - Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
 - Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
 
+- Makna Hasil Percobaan
+Berdasarkan percobaan yang dilakukan, diperoleh perbedaan perilaku container saat dijalankan tanpa limit resource dan dengan limit CPU serta memori:
+Tanpa limit resource
+Program CPU stress dapat berjalan sangat cepat karena container bebas menggunakan CPU host. Pada memory stress test, alokasi memori terus meningkat hingga mendekati kapasitas RAM host tanpa adanya pembatasan khusus.
+Dengan limit CPU dan memori
+Saat container dijalankan dengan opsi --cpus="0.5" dan --memory="256m", program mengalami:
+Eksekusi CPU yang lebih lambat karena jatah waktu CPU dibatasi.
+Program memory stress berhenti atau error ketika alokasi memori melebihi batas yang ditentukan, ditandai dengan pesan memory limit tercapai atau container dihentikan oleh sistem.
+Hasil ini menunjukkan bahwa Docker berhasil membatasi penggunaan sumber daya container sesuai konfigurasi yang diberikan.
+
+- Keterkaitan Hasil dengan Teori Sistem Operasi
+Hasil percobaan ini berkaitan erat dengan konsep inti pada sistem operasi, yaitu:
+
+Kernel dan Manajemen Resource
+Docker menggunakan kernel Linux secara langsung. Kernel bertanggung jawab dalam penjadwalan CPU dan manajemen memori. Pembatasan resource pada container diterapkan oleh kernel melalui mekanisme khusus.
+
+Cgroups (Control Groups)
+Pembatasan CPU dan memori yang diamati merupakan implementasi dari cgroups, yang memungkinkan kernel mengatur dan membatasi penggunaan resource pada sekelompok proses (container).
+
+System Call
+Program di dalam container tetap menggunakan system call standar (seperti alokasi memori dan eksekusi proses). Namun, kernel akan menolak atau membatasi permintaan resource jika melebihi limit cgroups yang telah ditetapkan.
+
+Arsitektur Sistem Operasi
+Container bukan virtual machine, melainkan proses terisolasi yang berjalan di atas kernel host. Oleh karena itu, pembatasan resource lebih efisien dan langsung berpengaruh terhadap proses yang berjalan di dalam container.
+
+- Perbedaan Hasil pada Lingkungan OS yang Berbeda (Linux vs Windows)
+Terdapat perbedaan penting dalam menjalankan Docker pada sistem operasi yang berbeda:
+Linux
+Docker berjalan secara native menggunakan kernel Linux. Fitur cgroups dan namespace tersedia secara langsung, sehingga pembatasan CPU dan memori bersifat akurat dan efisien.
+
+Windows
+Docker Desktop di Windows umumnya berjalan di atas virtual machine (WSL2 atau Hyper-V). Pembatasan resource container sebenarnya dibatasi terlebih dahulu oleh VM, kemudian oleh Docker di dalam VM tersebut.
+Akibatnya:
+Konsumsi resource bisa terasa lebih berat.
+Hasil monitoring docker stats bisa sedikit berbeda dibandingkan Linux.
+Overhead virtualisasi lebih besar dibandingkan Docker native di Linux.
+
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+Docker mampu membatasi penggunaan CPU dan memori pada container secara efektif menggunakan mekanisme kernel Linux (cgroups), sehingga penggunaan resource dapat dikendalikan sesuai kebutuhan.
+Pembatasan resource berpengaruh langsung terhadap perilaku aplikasi, di mana limit CPU menyebabkan eksekusi program menjadi lebih lambat, sedangkan limit memori dapat menghentikan aplikasi yang melebihi batas penggunaan RAM (Out of Memory).
+Penerapan resource limit pada container penting untuk menjaga stabilitas, efisiensi, dan keamanan sistem, terutama ketika menjalankan banyak aplikasi secara bersamaan dalam satu host.
 
 ---
 
-## Quiz
-1. [Pertanyaan 1]  
-   **Jawaban:**  
-2. [Pertanyaan 2]  
-   **Jawaban:**  
-3. [Pertanyaan 3]  
-   **Jawaban:**  
+## Tugas & Quiz
+### Tugas
+1. Buat Dockerfile sederhana dan program uji di folder `code/`.
+2. Build image dan jalankan container **tanpa limit**.
+3. Jalankan container dengan limit **CPU** dan **memori**.
+4. Sajikan hasil pengamatan dalam tabel/uraian singkat di `laporan.md`.
+**JAWABAN**
+Berdasarkan hasil eksekusi program uji dan monitoring menggunakan perintah docker stats, diperoleh pengamatan sebagai berikut:
+- Saat container dijalankan tanpa limit resource, program dapat menggunakan CPU dan memori secara bebas. Memory stress test berhasil mengalokasikan memori hingga sekitar 500 MB tanpa dihentikan oleh sistem, menunjukkan bahwa container memanfaatkan resource host secara penuh.
+- Saat container dijalankan dengan limit CPU 0.5 core dan memori 256 MB, eksekusi program menunjukkan pembatasan yang jelas. Penggunaan CPU dibatasi sekitar 50%, dan penggunaan memori tidak dapat melebihi 256 MB sesuai konfigurasi. Hal ini terlihat pada output docker stats yang menampilkan nilai MEM USAGE / LIMIT = 4.609MiB / 256MiB dan CPU usage sekitar 49–50%.
+- Container tetap berjalan dalam kondisi aktif hingga dihentikan secara manual (Ctrl+C), menunjukkan bahwa kernel berhasil mengontrol resource tanpa menyebabkan sistem host terganggu.
+
+Tabel Perbandingan Hasil Eksekusi
+| Aspek Pengamatan            | Tanpa Limit Resource                              | Dengan Limit CPU & Memori                |
+| --------------------------- | ------------------------------------------------- | ---------------------------------------- |
+| Penggunaan CPU              | Bebas, dapat menggunakan CPU host secara penuh    | Dibatasi ±50% sesuai `--cpus="0.5"`      |
+| Penggunaan Memori           | Meningkat hingga ±500 MB                          | Dibatasi maksimal 256 MB                 |
+| Perilaku Program            | CPU stress berjalan cepat, memori terus bertambah | CPU stress lebih lambat, memori dibatasi |
+| Status Container            | Berjalan normal                                   | Berjalan normal dengan pembatasan        |
+| Monitoring (`docker stats`) | Tidak ada batas jelas                             | MEM USAGE / LIMIT terlihat jelas         |
+| Dampak ke Sistem Host       | Berpotensi membebani host                         | Lebih stabil dan terkendali              |
+
+
+### Quiz
+Jawab pada bagian **Quiz** di laporan:
+1. Mengapa container perlu dibatasi CPU dan memori?
+**Jawaban:** Container perlu dibatasi CPU dan memori agar satu aplikasi tidak menghabiskan seluruh sumber daya sistem. Tanpa pembatasan, container yang boros resource dapat menyebabkan aplikasi lain melambat, sistem menjadi tidak stabil, bahkan crash. Pembatasan resource membantu menjaga stabilitas, keadilan pemakaian resource, dan keamanan sistem host.
+2. Apa perbedaan VM dan container dalam konteks isolasi resource?
+**Jawaban:** Virtual Machine (VM) melakukan isolasi resource dengan menjalankan sistem operasi lengkap di atas hypervisor, sehingga setiap VM memiliki kernel sendiri dan resource yang dialokasikan bersifat tetap.
+Sebaliknya, container hanya mengisolasi proses aplikasi dan berbagi kernel host, sehingga penggunaan resource lebih ringan, cepat, dan efisien, namun tingkat isolasinya lebih rendah dibandingkan VM.
+3. Apa dampak limit memori terhadap aplikasi yang boros memori?
+**Jawaban:** Jika aplikasi boros memori dijalankan dengan limit memori, maka ketika penggunaan RAM melebihi batas yang ditentukan, kernel akan menghentikan proses tersebut (Out of Memory / OOM). Akibatnya, aplikasi dapat berhenti tiba-tiba atau mengalami error. Hal ini mendorong pengembang untuk membuat aplikasi lebih efisien dan mencegah gangguan pada sistem secara keseluruhan.
+
 
 ---
 
