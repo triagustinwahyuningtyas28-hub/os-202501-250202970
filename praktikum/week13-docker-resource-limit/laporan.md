@@ -129,49 +129,17 @@ while True:
 
 ## Hasil Eksekusi
 
+![hasil](<screenshots/Screenshot (6).png>) 
+![hasil](<screenshots/Screenshot (7).png>)
+
 ---
 
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
-
-- Makna Hasil Percobaan
-Berdasarkan percobaan yang dilakukan, diperoleh perbedaan perilaku container saat dijalankan tanpa limit resource dan dengan limit CPU serta memori:
-Tanpa limit resource
-Program CPU stress dapat berjalan sangat cepat karena container bebas menggunakan CPU host. Pada memory stress test, alokasi memori terus meningkat hingga mendekati kapasitas RAM host tanpa adanya pembatasan khusus.
-Dengan limit CPU dan memori
-Saat container dijalankan dengan opsi --cpus="0.5" dan --memory="256m", program mengalami:
-Eksekusi CPU yang lebih lambat karena jatah waktu CPU dibatasi.
-Program memory stress berhenti atau error ketika alokasi memori melebihi batas yang ditentukan, ditandai dengan pesan memory limit tercapai atau container dihentikan oleh sistem.
-Hasil ini menunjukkan bahwa Docker berhasil membatasi penggunaan sumber daya container sesuai konfigurasi yang diberikan.
-
-- Keterkaitan Hasil dengan Teori Sistem Operasi
-Hasil percobaan ini berkaitan erat dengan konsep inti pada sistem operasi, yaitu:
-
-Kernel dan Manajemen Resource
-Docker menggunakan kernel Linux secara langsung. Kernel bertanggung jawab dalam penjadwalan CPU dan manajemen memori. Pembatasan resource pada container diterapkan oleh kernel melalui mekanisme khusus.
-
-Cgroups (Control Groups)
-Pembatasan CPU dan memori yang diamati merupakan implementasi dari cgroups, yang memungkinkan kernel mengatur dan membatasi penggunaan resource pada sekelompok proses (container).
-
-System Call
-Program di dalam container tetap menggunakan system call standar (seperti alokasi memori dan eksekusi proses). Namun, kernel akan menolak atau membatasi permintaan resource jika melebihi limit cgroups yang telah ditetapkan.
-
-Arsitektur Sistem Operasi
-Container bukan virtual machine, melainkan proses terisolasi yang berjalan di atas kernel host. Oleh karena itu, pembatasan resource lebih efisien dan langsung berpengaruh terhadap proses yang berjalan di dalam container.
-
-- Perbedaan Hasil pada Lingkungan OS yang Berbeda (Linux vs Windows)
-Terdapat perbedaan penting dalam menjalankan Docker pada sistem operasi yang berbeda:
-Linux
-Docker berjalan secara native menggunakan kernel Linux. Fitur cgroups dan namespace tersedia secara langsung, sehingga pembatasan CPU dan memori bersifat akurat dan efisien.
-
-Windows
-Docker Desktop di Windows umumnya berjalan di atas virtual machine (WSL2 atau Hyper-V). Pembatasan resource container sebenarnya dibatasi terlebih dahulu oleh VM, kemudian oleh Docker di dalam VM tersebut.
-Akibatnya:
-Konsumsi resource bisa terasa lebih berat.
-Hasil monitoring docker stats bisa sedikit berbeda dibandingkan Linux.
-Overhead virtualisasi lebih besar dibandingkan Docker native di Linux.
+| Kondisi Container | CPU      | Memori   | Perilaku Program |
+| ----------------- | -------- | -------- | ---------------- |
+| Tanpa limit       | Maksimal | Bebas    | Cepat & stabil   |
+| Limit CPU         | Terbatas | Normal   | Lebih lambat     |
+| Limit Memori      | Normal   | Terbatas | Error / OOM      |
 
 ---
 
